@@ -8,11 +8,14 @@ installed from the master branch.
 
 ## Screenshots
 
-- Startup
+Startup
 ![Startup Dashboard](screenshots/neovim_startup.png)
 
-- While editing some code
+While editing some code
 ![Editing Text](screenshots/neovim_editing.png)
+
+Telescope
+![Telescope](screenshots/neovim_telescope.png)
 
 ## Installation
 
