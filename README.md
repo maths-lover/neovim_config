@@ -25,7 +25,8 @@ Diagnostics view with noice
 
 ## Installation
 
-To install neovim, we can build the neovim like following:
+To install neovim on linux, assuming we have all build dependencies
+we can build neovim like following:
 
 ```bash
 git clone https://github.com/neovim/neovim.git
@@ -36,6 +37,8 @@ make CMAKE_BUILD_TYPE=Release
 
 sudo make install
 ```
+
+> For more info on building neovim for your platform, see [neovim build instructions](https://github.com/neovim/neovim/blob/master/BUILD.md)
 
 After installing neovim, we can install the config like following:
 
