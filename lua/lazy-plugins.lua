@@ -97,6 +97,9 @@ require('lazy').setup({
   -- toggleterm to toggle a terminal window in neovim session itself
   require 'plugins.toggleterm',
 
+  -- lsp-lens to show references, definitions, etc
+  require 'plugins.lsp-lens',
+
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
   --
