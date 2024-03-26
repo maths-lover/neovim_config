@@ -51,3 +51,7 @@ nvim
 ### Startup time
 
 For startuptime and other info, see in detail [here](log.txt)
+
+## TODO
+
+- [ ] Add support for cheat.sh
