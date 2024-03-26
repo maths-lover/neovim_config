@@ -129,9 +129,7 @@ return {
       },
 
       -- keymaps
-      vim.keymap.set('n', '<leader>e', function()
-        require('neo-tree').toggle()
-      end, { desc = 'Toggle NeoTree' }),
+      vim.keymap.set('n', '<leader>e', ':Neotree toggle<CR>', { desc = 'Toggle NeoTree' }),
     }
   end,
 }
