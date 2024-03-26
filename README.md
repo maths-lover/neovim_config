@@ -8,17 +8,20 @@ installed from the master branch.
 
 ## Screenshots
 
-Startup
+Startup dashboard
 ![Startup Dashboard](screenshots/neovim_startup.png)
 
-While editing some code
+While editing some code, cmp, lsp, mason, etc.
 ![Editing Text](screenshots/neovim_editing.png)
 
-Telescope
+Telescope as files finder and much more
 ![Telescope](screenshots/neovim_telescope.png)
 
-Neo-Tree
+Neo-Tree as file explorer
 ![Neo-Tree](screenshots/neovim_neotree.png)
+
+Diagnostics view with noice
+![Diagnostics](screenshots/neovim_noice.png)
 
 ## Installation
 
