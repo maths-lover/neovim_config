@@ -17,6 +17,9 @@ While editing some code
 Telescope
 ![Telescope](screenshots/neovim_telescope.png)
 
+Neo-Tree
+![Neo-Tree](screenshots/neovim_neotree.png)
+
 ## Installation
 
 To install neovim, we can build the neovim like following:
