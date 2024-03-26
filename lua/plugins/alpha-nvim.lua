@@ -36,6 +36,7 @@ return {
       dashboard.button('f', ' ' .. 'Find files', ':Telescope find_files<CR>'),
       dashboard.button('t', ' ' .. 'Change theme', ':Telescope colorscheme<CR>'),
       dashboard.button('l', ' ' .. 'LazyUI', ':Lazy <CR>'),
+      dashboard.button('q', '󰗼 ' .. 'Quit', ':q<CR>'),
     }
     for _, button in ipairs(dashboard.section.buttons.val) do
       button.opts.hl = 'AlphaButtons'
