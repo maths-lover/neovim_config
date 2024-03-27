@@ -20,8 +20,8 @@ Telescope as files finder and much more
 Neo-Tree as file explorer
 ![Neo-Tree](screenshots/neovim_neotree.png)
 
-Diagnostics view with noice
-![Diagnostics](screenshots/neovim_noice.png)
+Diagnostics view with trouble
+![Diagnostics](screenshots/neovim_trouble.png)
 
 ## Installation
 
