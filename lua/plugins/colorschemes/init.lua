@@ -1,6 +1,7 @@
 local function set_colorscheme()
   vim.opt.background = 'dark'
-  vim.cmd.colorscheme 'nord'
+  vim.cmd.colorscheme 'evergarden'
+  vim.opt.termguicolors = true
   -- vim.cmd.hi 'Comment gui=none' -- used in tokyonight colorscheme
 end
 
@@ -33,6 +34,11 @@ return {
   },
   {
     'rebelot/kanagawa.nvim',
+    priority = 1000,
+    init = set_colorscheme,
+  },
+  {
+    'savq/melange-nvim',
     priority = 1000,
     init = set_colorscheme,
   },
