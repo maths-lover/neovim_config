@@ -31,4 +31,9 @@ return {
     priority = 1000,
     init = set_colorscheme,
   },
+  {
+    'rebelot/kanagawa.nvim',
+    priority = 1000,
+    init = set_colorscheme,
+  },
 }
