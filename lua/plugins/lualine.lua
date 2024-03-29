@@ -5,6 +5,13 @@ return {
   },
   config = function()
     local lualine = require 'lualine'
+    local function filepath()
+      local path = vim.fn.expand '%'
+      if vim.fn.winwidth(0) <= 84 then
+        path = vim.fn.pathshorten(path)
+      end
+      return path
+    end
     lualine.setup {
       options = {
         icons_enabled = true,
@@ -31,12 +38,12 @@ return {
           'diff',
           {
             'diagnostics',
-            on_click = function()
+            on_click = function() -- toggle trouble if clicked
               vim.cmd ':TroubleToggle'
             end,
           },
         },
-        lualine_c = { 'filename' },
+        lualine_c = { filepath },
         lualine_x = {
           'encoding',
           'fileformat',
@@ -61,7 +68,9 @@ return {
       tabline = {},
       winbar = {},
       inactive_winbar = {},
-      extensions = {},
+      extensions = {
+        'neo-tree',
+      },
     }
   end,
 }
