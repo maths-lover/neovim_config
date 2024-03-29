@@ -237,11 +237,24 @@ return {
       }
 
       --Customize diagnostics Icons
-      local signs = { Error = '󰅙', Warn = '󰀦', Hint = '󰐗', Info = '󰋼' }
-      for type, icon in pairs(signs) do
-        local hl = 'DiagnosticSign' .. type
-        vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-      end
+      -- local signs = { Error = '󰅙', Warn = '󰀦', Hint = '󰐗', Info = '󰋼' }
+      -- for type, icon in pairs(signs) do
+      --   local hl = 'DiagnosticSign' .. type
+      --   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+      -- end
+
+      -- after sign implementation refactor by using extmark, we can use nvim_buf_set_extmark to set diagnostic sign instead of get sign text from sign_define.
+      local icon = require('maths-lover.utils').get_icon
+      vim.diagnostic.config {
+        signs = {
+          text = {
+            ['ERROR'] = icon 'DiagnosticError',
+            ['WARN'] = icon 'DiagnosticWarn',
+            ['HINT'] = icon 'DiagnosticHint',
+            ['INFO'] = icon 'DiagnosticInfo',
+          },
+        },
+      }
     end,
   },
 }
