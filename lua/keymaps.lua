@@ -55,4 +55,7 @@ vim.keymap.set('n', '<leader>q', '<C-w>c', { desc = 'Close buffer' })
 -- Close all other buffer windows except selected buffer window
 vim.keymap.set('n', '<leader>Q', '<C-w>o', { desc = 'Close all other buffers except selected one' })
 
+-- open a new file
+vim.keymap.set('n', '<leader>n', '<cmd>enew<CR>', { desc = 'Open a new file' })
+
 -- vim: ts=2 sts=2 sw=2 et

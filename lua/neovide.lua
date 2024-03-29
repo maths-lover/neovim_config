@@ -7,7 +7,7 @@ if vim.g.neovide then
   vim.g.neovide_light_angle_degrees = 45
   vim.g.neovide_light_radius = 5
   vim.g.neovide_hide_mouse_when_typing = true
-  vim.g.neovide_transparency = 0.9
+  -- vim.g.neovide_transparency = 0.9
   vim.g.neovide_refresh_rate = 75
   vim.g.neovide_refresh_rate_idle = 5
   -- vim.g.neovide_cursor_animation_length = 0.13

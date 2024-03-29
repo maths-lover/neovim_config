@@ -248,10 +248,10 @@ return {
       vim.diagnostic.config {
         signs = {
           text = {
-            ['ERROR'] = icon 'DiagnosticError',
-            ['WARN'] = icon 'DiagnosticWarn',
-            ['HINT'] = icon 'DiagnosticHint',
-            ['INFO'] = icon 'DiagnosticInfo',
+            [1] = icon 'DiagnosticError',
+            [2] = icon 'DiagnosticWarn',
+            [3] = icon 'DiagnosticHint',
+            [4] = icon 'DiagnosticInfo',
           },
         },
       }
