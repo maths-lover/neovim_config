@@ -59,7 +59,7 @@ require('lazy').setup({
   require 'plugins.debug',
 
   -- to show indent lines, looks nice to show what scope are we in
-  require 'plugins.indent_line',
+  -- require 'plugins.indent_line',
 
   -- to automatically lint stuff
   require 'plugins.lint',

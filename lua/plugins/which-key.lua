@@ -29,6 +29,8 @@ return {
         ['<leader>t'] = { name = '[T]rouble', _ = 'which_key_ignore' },
         ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
         ['<leader>sG'] = { name = '[S]earch [G]it', _ = 'which_key_ignore' },
+        ['<leader>g'] = { name = '[G]eneral actions', _ = 'which_key_ignore' },
+        ['<leader>h'] = { name = 'Git [H]unk actions', _ = 'which_key_ignore' },
       }
     end,
   },
