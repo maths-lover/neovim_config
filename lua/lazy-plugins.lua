@@ -76,14 +76,8 @@ require('lazy').setup({
   -- diagnostic pane like in IDEs
   require 'plugins.trouble',
 
-  -- zen-mode
-  'folke/zen-mode.nvim',
-
   -- github's copilot
-  'github/copilot.vim',
-
-  -- useless thing
-  'eandrju/cellular-automaton.nvim',
+  require 'plugins.copilot',
 
   -- undo tree
   require 'plugins.undotree',
@@ -99,13 +93,6 @@ require('lazy').setup({
 
   -- lsp-lens to show references, definitions, etc
   require 'plugins.lsp-lens',
-
-  -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
-  --    This is the easiest way to modularize your config.
-  --
-  --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
-  --    For additional information, see `:help lazy.nvim-lazy.nvim-structuring-your-plugins`
-  -- { import = 'custom.plugins' },
 }, {
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
