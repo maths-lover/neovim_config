@@ -23,76 +23,76 @@ require('lazy').setup({
   -- include a plugin definition from file lua/path/name.lua
 
   -- utilize treesitter to auto-comment stuff using nice shortcuts like <leader>cl (comment line)
-  require 'plugins.comment',
+  require 'maths-lover.plugins.comment',
 
   -- colorschemes to use
-  require 'plugins.colorschemes',
+  require 'maths-lover.plugins.colorschemes',
 
   -- to use git signs, tells useful info about what text is added and what is not
-  require 'plugins.gitsigns',
+  require 'maths-lover.plugins.gitsigns',
 
   -- to show keymaps
-  require 'plugins.which-key',
+  require 'maths-lover.plugins.which-key',
 
   -- to use telescope to find files, words, etc.
-  require 'plugins.telescope',
+  require 'maths-lover.plugins.telescope',
 
   -- to use LSP
-  require 'plugins.lspconfig',
+  require 'maths-lover.plugins.lspconfig',
 
   -- to autoformat code
-  require 'plugins.conform',
+  require 'maths-lover.plugins.conform',
 
   -- completion plugin
-  require 'plugins.cmp',
+  require 'maths-lover.plugins.cmp',
 
   -- highlight TODO, NOTE, FIXME, etc
-  require 'plugins.todo-comments',
+  require 'maths-lover.plugins.todo-comments',
 
   -- nice little plugins
-  require 'plugins.mini',
+  require 'maths-lover.plugins.mini',
 
-  -- well treesitter, the nice coloring, the parser generator for lots of neovim plugins
-  require 'plugins.treesitter',
+  -- well treesitter, the nice coloring, the parser generator for lots of neovim maths-lover.plugins
+  require 'maths-lover.plugins.treesitter',
 
   -- Utlizes dap for debugging
-  require 'plugins.debug',
+  require 'maths-lover.plugins.debug',
 
   -- to show indent lines, looks nice to show what scope are we in
-  -- require 'plugins.indent_line',
+  -- require 'maths-lover.plugins.indent_line',
 
   -- to automatically lint stuff
-  require 'plugins.lint',
+  require 'maths-lover.plugins.lint',
 
   -- startup-dashboard
-  require 'plugins.alpha-nvim',
+  require 'maths-lover.plugins.alpha-nvim',
 
   -- Nice looking UI
-  require 'plugins.noice',
+  require 'maths-lover.plugins.noice',
 
   -- status bar  at the bottom
-  require 'plugins.lualine',
+  require 'maths-lover.plugins.lualine',
 
   -- diagnostic pane like in IDEs
-  require 'plugins.trouble',
+  require 'maths-lover.plugins.trouble',
 
   -- github's copilot
-  require 'plugins.copilot',
+  require 'maths-lover.plugins.copilot',
 
   -- undo tree
-  require 'plugins.undotree',
+  require 'maths-lover.plugins.undotree',
 
   -- neo-tree for file explorer tree
-  require 'plugins.neo-tree',
+  require 'maths-lover.plugins.neo-tree',
 
   -- lspkind to show icons in completion menu
-  require 'plugins.lspkind',
+  require 'maths-lover.plugins.lspkind',
 
   -- toggleterm to toggle a terminal window in neovim session itself
-  require 'plugins.toggleterm',
+  require 'maths-lover.plugins.toggleterm',
 
   -- lsp-lens to show references, definitions, etc
-  require 'plugins.lsp-lens',
+  require 'maths-lover.plugins.lsp-lens',
 }, {
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the

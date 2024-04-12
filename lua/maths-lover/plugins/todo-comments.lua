@@ -2,14 +2,15 @@
 local function todo_keymaps()
   -- keywords to respond to while navigating todos
   local todo_keywords = { 'NOTE', 'ERROR', 'WARNING', 'TODO', 'FIX', 'FIXME' }
-
-  vim.keymap.set('n', ']t', function()
-    require('todo-comments').jump_next { keywords = todo_keywords }
-  end, { desc = 'Next error/warning/todo/fix comment' })
-
-  vim.keymap.set('n', '[t', function()
-    require('todo-comments').jump_prev { keywords = todo_keywords }
-  end, { desc = 'Next error/warning/todo/fix comment' })
+  local map = function(mode, key_trigger, action, opts)
+    opts = opts or {}
+    vim.keymap.set(mode, key_trigger, function()
+      action(todo_keywords)
+    end, opts)
+  end
+  for _, mapping in ipairs(require('maths-lover.keymaps.todo-keymaps').mappings) do
+    map(mapping.mode, mapping.key_trigger, mapping.action, mapping.opts)
+  end
 end
 
 -- Highlight todo, notes, etc in comments

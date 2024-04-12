@@ -9,6 +9,16 @@ return {
   },
   opts = function()
     local icon = require('maths-lover.utils').get_icon
+
+    -- NOTE: There are mnore keymaps in the window_mappings and results_mappings below
+    --
+    -- main keymaps
+    local win_mappings = require('maths-lover.keymaps.neo-tree-keymaps').window_mappings
+    local main_mappings = require('maths-lover.keymaps.neo-tree-keymaps').main_mappings
+    for _, mapping in ipairs(main_mappings) do
+      vim.keymap.set(mapping.mode, mapping.key_trigger, mapping.action, mapping.opts)
+    end
+
     return {
       auto_clean_after_session_restore = true,
       close_if_last_window = true,
@@ -67,19 +77,7 @@ return {
           end
         end,
         copy_selector = function(state)
-          local node = state.tree:get_node()
-          local filepath = node:get_id()
-          local filename = node.name
-          local modify = vim.fn.fnamemodify
-
-          local results = {
-            e = { val = modify(filename, ':e'), msg = 'Extension only' },
-            f = { val = filename, msg = 'Filename' },
-            F = { val = modify(filename, ':r'), msg = 'Filename w/o extension' },
-            h = { val = modify(filepath, ':~'), msg = 'Path relative to Home' },
-            p = { val = modify(filepath, ':.'), msg = 'Path relative to CWD' },
-            P = { val = filepath, msg = 'Absolute path' },
-          }
+          local results = require('maths-lover.keymaps.neo-tree-keymaps').results_mappings(state)
 
           local messages = {
             { '\nChoose to copy to clipboard:\n', 'Normal' },
@@ -104,15 +102,7 @@ return {
       },
       window = {
         width = 30,
-        mappings = {
-          ['<space>'] = false, -- disable space until we figure out which-key disabling
-          ['[b'] = 'prev_source',
-          [']b'] = 'next_source',
-          o = 'open',
-          h = 'parent_or_close',
-          l = 'child_or_open',
-          Y = 'copy_selector',
-        },
+        mappings = win_mappings,
       },
       filesystem = {
         follow_current_file = { enabled = true },
@@ -127,9 +117,6 @@ return {
           end,
         },
       },
-
-      -- keymaps
-      vim.keymap.set('n', '<leader>e', ':Neotree toggle<CR>', { desc = 'Toggle NeoTree' }),
     }
   end,
 }

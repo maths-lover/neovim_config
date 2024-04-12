@@ -2,8 +2,8 @@ return {
   'akinsho/toggleterm.nvim',
   version = '*',
   opts = function()
+    local terminal_mappings = require('maths-lover.keymaps.toggleterm-keymaps').mappings
     return {
-      -- size = 10 | function(term)
       size = function(term)
         if term.direction == 'horizontal' then
           return 15
@@ -11,7 +11,7 @@ return {
           return vim.o.columns * 0.4
         end
       end,
-      open_mapping = [[<F7>]],
+      open_mapping = terminal_mappings.open_mapping,
       shading_factor = 2,
       direction = 'float',
       float_opts = {
