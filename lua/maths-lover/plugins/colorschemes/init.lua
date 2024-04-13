@@ -29,7 +29,10 @@ return {
     priority = 1000,
   },
   {
-    'RRethy/nvim-base16',
+    'maths-lover/pinot_noir.nvim',
+    dependencies = {
+      'tjdevries/colorbuddy.nvim',
+    },
     priority = 1000,
   },
 }

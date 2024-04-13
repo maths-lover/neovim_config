@@ -59,8 +59,16 @@ return {
             vim.keymap.set(mode, l, r, opts)
           end
 
-          local mappings = require('maths-lover.keymaps.gitsigns-keymaps').all_mappings
-          for _, mapping in ipairs(mappings) do
+          local navigation_mappings = require('maths-lover.keymaps.gitsigns-keymaps').navigation_maps
+          local action_mappings = require('maths-lover.keymaps.gitsigns-keymaps').action_mappings
+          local textobject_mappings = require('maths-lover.keymaps.gitsigns-keymaps').textobject_mappings
+          for _, mapping in ipairs(navigation_mappings) do
+            map(mapping.mode, mapping.key_trigger, mapping.action, mapping.opts)
+          end
+          for _, mapping in ipairs(action_mappings) do
+            map(mapping.mode, mapping.key_trigger, mapping.action, mapping.opts)
+          end
+          for _, mapping in ipairs(textobject_mappings) do
             map(mapping.mode, mapping.key_trigger, mapping.action, mapping.opts)
           end
         end,

@@ -1,4 +1,4 @@
-local gs = package.loaded.gitsigns
+local gs = require 'gitsigns'
 
 local M = {}
 
@@ -124,12 +124,6 @@ M.textobject_mappings = {
     action = ':<C-U>Gitsigns select_hunk<CR>',
     opts = { desc = 'Gitsigns select_hunk' },
   },
-}
-
-M.all_mappings = vim.tbl_flatten {
-  M.navigation_maps,
-  M.action_mappings,
-  M.textobject_mappings,
 }
 
 return M
