@@ -13,9 +13,6 @@ require 'maths-lover.options'
 -- [[ Basic Keymaps ]]
 require 'maths-lover.keymaps'
 
--- [[ Basic Autocommands ]]
-require 'maths-lover.autocmds'
-
 -- [[ Install `lazy.nvim` plugin manager ]]
 require 'maths-lover.lazy-bootstrap'
 
@@ -24,6 +21,9 @@ require 'maths-lover.lazy-plugins'
 
 -- [[ Neovide configuration ]]
 require 'maths-lover.neovide'
+
+-- [[ Basic Autocommands ]]
+require 'maths-lover.autocmds'
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

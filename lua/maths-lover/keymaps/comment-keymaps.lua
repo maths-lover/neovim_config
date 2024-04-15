@@ -2,9 +2,9 @@ local M = {}
 
 M.toggle_maps = {
   ---Line-comment toggle keymap
-  line = '<leader>cl',
+  line = '<leader>clc',
   ---Block-comment toggle keymap
-  block = '<leader>cb',
+  block = '<leader>cbc',
 }
 
 M.opleader_maps = {

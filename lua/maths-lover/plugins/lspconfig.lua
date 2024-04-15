@@ -98,7 +98,7 @@ return {
 
           -- Execute a code action, usually your cursor needs to be on top of an error
           -- or a suggestion from your LSP for this to activate.
-          map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+          map('<leader>la', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
           -- Opens a popup that displays documentation about the word under your cursor
           --  See `:help K` for why this keymap.
@@ -145,7 +145,17 @@ return {
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
-        clangd = {},
+        clangd = {
+          -- Though it is working fine without having following modifs to capabilities, it is just there just in case
+          capabilities = {
+            textDocument = {
+              completion = {
+                editsNearCursor = true,
+              },
+            },
+            offsetEncoding = { 'utf-8' },
+          },
+        },
         gopls = {},
         pyright = {},
         -- rust_analyzer = {},

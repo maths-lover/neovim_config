@@ -65,7 +65,7 @@ require('lazy').setup({
   require 'maths-lover.plugins.lint',
 
   -- startup-dashboard
-  require 'maths-lover.plugins.alpha-nvim',
+  -- require 'maths-lover.plugins.alpha-nvim',
 
   -- Nice looking UI
   require 'maths-lover.plugins.noice',
@@ -82,8 +82,8 @@ require('lazy').setup({
   -- undo tree
   require 'maths-lover.plugins.undotree',
 
-  -- neo-tree for file explorer tree
-  require 'maths-lover.plugins.neo-tree',
+  -- neo-tree for file explorer tree --  bye bye!
+  -- require 'maths-lover.plugins.neo-tree',
 
   -- lspkind to show icons in completion menu
   require 'maths-lover.plugins.lspkind',

@@ -17,6 +17,20 @@ return {
       -- - sr)'  - [S]urround [R]eplace [)] [']
       require('mini.surround').setup()
 
+      -- starter screen, thinking to remove alpha-nvim
+      require('mini.starter').setup()
+
+      -- mini.files is a filesystem plugin and I'm thinking of removing neo-tree
+      -- as it is slightly heavy and I don't really use it much other than creating some
+      -- files and stuff
+      -- okay neo-tree replaced man, this is awesome stuff right there.
+      require('mini.files').setup()
+
+      -- sessions for maintaining sessions
+      require('mini.sessions').setup {
+        autoread = true,
+      }
+
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
       --  and try some other statusline plugin
