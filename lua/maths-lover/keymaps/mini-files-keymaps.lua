@@ -21,7 +21,7 @@ M.split_mappings = {
   },
   {
     key_trigger = 's',
-    direction = 'belowright horizontal',
+    direction = 'belowright vertical',
   },
 }
 
