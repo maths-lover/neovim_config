@@ -10,14 +10,14 @@ vim.g.have_nerd_font = true
 -- [[ Setting options ]]
 require 'maths-lover.options'
 
--- [[ Basic Keymaps ]]
-require 'maths-lover.keymaps'
-
 -- [[ Install `lazy.nvim` plugin manager ]]
 require 'maths-lover.lazy-bootstrap'
 
 -- [[ Configure and install plugins ]]
 require 'maths-lover.lazy-plugins'
+
+-- [[ Basic Keymaps ]]
+require 'maths-lover.keymaps'
 
 -- [[ Neovide configuration ]]
 require 'maths-lover.neovide'

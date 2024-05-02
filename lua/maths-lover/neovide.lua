@@ -1,5 +1,6 @@
 if vim.g.neovide then
-  vim.opt.guifont = 'VictorMono Nerd Font:h16'
+  -- vim.opt.guifont = 'VictorMono Nerd Font:h16'
+  vim.opt.guifont = '0xProto Nerd Font:h12'
   vim.g.neovide_floating_blur_amount_x = 1.0
   vim.g.neovide_floating_blur_amount_y = 1.0
   vim.g.neovide_floating_shadow = true

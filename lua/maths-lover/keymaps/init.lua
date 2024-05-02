@@ -58,7 +58,7 @@ vim.keymap.set('n', '<C-left>', '<C-w><', { desc = 'Shrink width' })
 vim.keymap.set('n', '<C-right>', '<C-w>>', { desc = 'Grow width' })
 vim.keymap.set('n', '<C-up>', '<C-w>+', { desc = 'Grow height' })
 vim.keymap.set('n', '<C-down>', '<C-w>-', { desc = 'Shrink height' })
-vim.keymap.set('n', '<C-=>', '<C-w>=', { desc = 'Set width and height in equal proportion' })
+vim.keymap.set('n', '<C-z>', '<C-w>_<C-w>|', { desc = 'Zoom the selected window' })
 
 -- Set Alt-{h,j,k,l} to swap windows
 vim.keymap.set('n', '<A-h>', '<C-w>H', { desc = 'Swap buffer window to left buffer window' })
@@ -79,6 +79,6 @@ vim.keymap.set('n', '<leader>g<tab>', '<cmd>tabnext<CR>', { desc = 'Go to next t
 vim.keymap.set('n', '<leader>g<S-tab>', '<cmd>tabprevious<CR>', { desc = 'Go to previous tab' })
 
 -- Plugin specific keymaps
--- TODO: Get all plugin specific keymaps here itself
+require 'maths-lover.keymaps.conform-keymaps'
 
 -- vim: ts=2 sts=2 sw=2 et

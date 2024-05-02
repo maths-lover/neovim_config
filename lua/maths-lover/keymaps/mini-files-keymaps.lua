@@ -34,7 +34,7 @@ M.general_mappings = {
   },
   {
     mode = 'n',
-    key_trigger = 'g~',
+    key_trigger = '<C-.>',
     action = 'set_cwd',
     opts = { desc = 'Set current working directory to directory under the cursor' },
   },
