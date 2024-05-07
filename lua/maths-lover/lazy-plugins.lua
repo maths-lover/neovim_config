@@ -93,6 +93,9 @@ require('lazy').setup({
 
   -- lsp-lens to show references, definitions, etc
   require 'maths-lover.plugins.lsp-lens',
+
+  -- precognition for quick movements
+  require 'maths-lover.plugins.precognition',
 }, {
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
