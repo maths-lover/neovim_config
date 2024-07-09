@@ -99,6 +99,9 @@ require('lazy').setup({
 
   -- precognition for quick movements
   require 'maths-lover.plugins.precognition',
+
+  -- markdown preview in terminal itself
+  require 'maths-lover.plugins.markview',
 }, {
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
