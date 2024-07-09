@@ -40,6 +40,9 @@ require('lazy').setup({
   -- to use LSP
   require 'maths-lover.plugins.lspconfig',
 
+  -- to use LSP but for typescript projects
+  require 'maths-lover.plugins.typescript-tools',
+
   -- to autoformat code
   require 'maths-lover.plugins.conform',
 

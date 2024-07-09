@@ -1,6 +1,6 @@
 return {
   'tris203/precognition.nvim',
-  config = {
+  opts = {
     startVisible = false,
     -- hints = {
     --     ["^"] = { text = "^", prio = 1 },

@@ -158,7 +158,7 @@ return {
         },
         gopls = {},
         pyright = {},
-        -- rust_analyzer = {},
+        rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
@@ -206,6 +206,8 @@ return {
         'goimports-reviser', -- Used to format Go code
         'isort', -- Used to format Python code
         'black', -- Used to format Python code
+        'ast_grep', -- Used for Rust specifically instead of all other languages that it supports
+        'trivy', -- Used for Rust
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 

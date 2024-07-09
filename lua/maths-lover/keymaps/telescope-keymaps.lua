@@ -139,6 +139,30 @@ M.builtin_mappings = {
     end,
     opts = { desc = '[S]earch [N]eovim files' },
   },
+  {
+    mode = 'n',
+    key_trigger = '<leader>sz',
+    action = function()
+      builtin.find_files {
+        cwd = os.getenv 'ZDOTDIR',
+        find_command = function()
+          local zsh_search_path = os.getenv 'ZDOTDIR'
+          return {
+            'fd',
+            '-H',
+            '--color',
+            'never',
+            '--follow',
+            '--regex',
+            '.z((login)|(logout)|(preztorc)|(profile)|(shenv)|(shrc))|starship|dot_alias',
+            zsh_search_path,
+          }
+        end,
+        hidden = true,
+      }
+    end,
+    opts = { desc = '[S]earch [Z]sh files' },
+  },
 }
 
 return M
