@@ -13,7 +13,7 @@ return {
     },
     build = ':TSUpdate',
     opts = {
-      ensure_installed = { 'bash', 'c', 'html', 'lua', 'markdown', 'vim', 'vimdoc', 'regex', 'markdown_inline', 'go', 'python', 'cpp', 'c' },
+      ensure_installed = { 'bash', 'c', 'html', 'lua', 'markdown', 'vim', 'vimdoc', 'regex', 'markdown_inline', 'go', 'python', 'cpp', 'c', 'query' },
       -- Autoinstall languages that are not installed
       auto_install = true,
       autotag = { enable = true },

@@ -17,13 +17,10 @@ return {
   { -- Useful plugin to show you pending keybinds.
     'folke/which-key.nvim',
     event = 'VimEnter', -- Sets the loading event to 'VimEnter'
-    config = function() -- This is the function that runs, AFTER loading
-      require('which-key').setup()
-
-      local register_mappings = require('maths-lover.keymaps.which-key-keymaps').register_key_mappings
-
-      -- Document existing key chains
-      require('which-key').register(register_mappings)
+    opts = {},
+    keys = function()
+      local wk_mappings = require('maths-lover.keymaps.which-key-keymaps').which_key_mappings
+      return wk_mappings
     end,
   },
 }
