@@ -16,10 +16,14 @@ vim.opt.showmode = true
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
-vim.opt.clipboard = 'unnamedplus'
+vim.opt.clipboard = vim.env.SSH_TTY and '' or 'unnamedplus'
 
 -- Enable break indent
 vim.opt.breakindent = true
+
+-- NOTE: following is now set by nvim-cmp
+-- behaviour of completion menu
+-- vim.opt.completeopt = 'menu,menuone,noselect'
 
 -- tab settings
 vim.opt.tabstop = 2
@@ -77,5 +81,8 @@ vim.opt.autoread = true
 
 -- custom handlers for lsp hover
 vim.g.lsp_handlers_enabled = true
+
+-- set the bigfile size to avoid loading plugins for those files
+vim.g.bigfile_size = 1024 * 1024 * 1.5 -- 1.5 MB
 
 -- vim: ts=2 sts=2 sw=2 et

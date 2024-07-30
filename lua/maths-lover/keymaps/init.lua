@@ -1,12 +1,19 @@
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
--- NOTE: Any plugin specific keymap if it is not present here then look into plugin's lua file
--- It might be present in plugin's init function
+-- NOTE: Any plugin specific keymap if it is not present here then look into plugin's lua file how it is being sourced
+-- It might be present in plugin's keymap file in the keymaps directory
+
+-- source the current file to bring changes
+vim.keymap.set('n', '<leader><leader>x', '<cmd>so %<CR>', { desc = 'Source current file for neovim' })
 
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+
+-- Set j to actually go down visually instead of linewise
+vim.keymap.set('n', 'j', 'gj')
+vim.keymap.set('n', 'k', 'gk')
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })

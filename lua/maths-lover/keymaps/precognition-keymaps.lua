@@ -5,7 +5,7 @@ local M = {}
 M.mappings = {
   {
     mode = 'n',
-    key_trigger = '<leader>pt',
+    key_trigger = '<leader>Pt',
     action = function()
       pc.toggle()
     end,
@@ -13,7 +13,7 @@ M.mappings = {
   },
   {
     mode = 'n',
-    key_trigger = '<leader>pp',
+    key_trigger = '<leader>Pp',
     action = function()
       pc.peek()
     end,
