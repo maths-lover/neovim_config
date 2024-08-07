@@ -13,6 +13,9 @@ vim.opt.mouse = 'a'
 -- Don't show the mode, since it's already in the status line
 vim.opt.showmode = true
 
+-- set statusline behaviour
+vim.opt.laststatus = 3
+
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
@@ -30,6 +33,19 @@ vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 vim.opt.expandtab = true
 
+-- fold fillchars
+vim.opt.fillchars = {
+  foldopen = '',
+  foldclose = '',
+  fold = ' ',
+  foldsep = ' ',
+  diff = '╱',
+  eob = ' ',
+}
+
+-- fold level to have fold by default
+vim.opt.foldlevel = 99
+
 -- auto indent
 vim.opt.smartindent = true
 vim.opt.shiftwidth = 2
@@ -42,7 +58,7 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
 -- Keep signcolumn on by default
-vim.opt.signcolumn = 'yes:3'
+vim.opt.signcolumn = 'yes:2'
 
 -- Decrease update time
 vim.opt.updatetime = 250
@@ -63,6 +79,9 @@ vim.opt.listchars = { tab = ' ', trail = '', nbsp = '␣' }
 
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = 'split'
+
+-- use view option instead of default one which puts jumps in weird stack while still not being stack
+vim.opt.jumpoptions = 'view'
 
 -- Show which line your cursor is on
 vim.opt.cursorline = true

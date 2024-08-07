@@ -3,6 +3,7 @@ return {
   dependencies = {
     'nvim-tree/nvim-web-devicons',
   },
+  enabled = false,
   config = function()
     local lualine = require 'lualine'
     local function filepath()
@@ -41,7 +42,7 @@ return {
           {
             'diagnostics',
             on_click = function() -- toggle trouble if clicked
-              vim.cmd ':TroubleToggle'
+              vim.cmd ':Telescope diagnostics'
             end,
           },
         },

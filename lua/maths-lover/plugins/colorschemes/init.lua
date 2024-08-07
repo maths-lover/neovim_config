@@ -1,6 +1,11 @@
 -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
 return {
   {
+    'catppuccin/nvim',
+    name = 'catppuccin',
+    priority = 1000,
+  },
+  {
     'nyoom-engineering/oxocarbon.nvim',
     priority = 1000,
   },
@@ -9,15 +14,7 @@ return {
     priority = 1000,
   },
   {
-    'crispybaccoon/evergarden',
-    priority = 1000,
-  },
-  {
     'shaunsingh/nord.nvim',
-    priority = 1000,
-  },
-  {
-    'fenetikm/falcon',
     priority = 1000,
   },
   {
@@ -33,6 +30,11 @@ return {
     dependencies = {
       'tjdevries/colorbuddy.nvim',
     },
+    priority = 1000,
+  },
+  {
+    'rose-pine/neovim',
+    name = 'rose-pine',
     priority = 1000,
   },
 }
