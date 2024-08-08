@@ -163,6 +163,12 @@ M.builtin_mappings = {
     end,
     opts = { desc = '[S]earch [Z]sh files' },
   },
+  {
+    mode = 'n',
+    key_trigger = '<leader>sC',
+    action = builtin.colorscheme,
+    opts = { desc = '[S]earch [C]olorschemes' },
+  },
 }
 
 return M

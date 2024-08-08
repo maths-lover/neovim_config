@@ -63,7 +63,11 @@ return {
           selection_caret = string.format('%s ', get_icon 'Selected'),
           mappings = default_mappings,
         },
-        -- pickers = {}
+        pickers = {
+          colorscheme = {
+            enable_preview = true,
+          },
+        },
         extensions = {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
