@@ -26,7 +26,8 @@ vim.opt.breakindent = true
 
 -- NOTE: following is now set by nvim-cmp
 -- behaviour of completion menu
--- vim.opt.completeopt = 'menu,menuone,noselect'
+vim.opt.completeopt = 'menu,menuone,noselect'
+vim.opt.shortmess:append 'cs'
 
 -- tab settings
 vim.opt.tabstop = 2
