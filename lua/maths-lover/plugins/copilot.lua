@@ -1,6 +1,7 @@
 -- copilot plugin
 return {
   'zbirenbaum/copilot.lua',
+  enabled = false,
   cmd = 'Copilot',
   build = ':Copilot auth',
   opts = function()
