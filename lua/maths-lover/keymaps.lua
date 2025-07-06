@@ -8,7 +8,6 @@
 vim.keymap.set('n', '<leader><leader>x', '<cmd>so %<CR>', { desc = 'Source current file for neovim' })
 
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
-vim.opt.hlsearch = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Set j to actually go down visually instead of linewise
@@ -81,11 +80,10 @@ vim.keymap.set('n', '<leader>Q', '<C-w>o', { desc = 'Close all other buffers exc
 -- open a new file
 vim.keymap.set('n', '<leader>n', '<cmd>enew<CR>', { desc = 'Open a new file' })
 
+-- Tabs
+vim.keymap.set('n', '<leader>N', '<cmd>tabnew<CR>', { desc = 'Create a buffer in new tab' })
 -- use <C-tab> and <C-shift-tab> to change tabs
-vim.keymap.set('n', '<leader>g<tab>', '<cmd>tabnext<CR>', { desc = 'Go to next tab' })
-vim.keymap.set('n', '<leader>g<S-tab>', '<cmd>tabprevious<CR>', { desc = 'Go to previous tab' })
-
--- Plugin specific keymaps
-require 'maths-lover.keymaps.conform-keymaps'
+vim.keymap.set('n', '<leader><tab>', '<cmd>tabnext<CR>', { desc = 'Go to next tab' })
+vim.keymap.set('n', '<leader><S-tab>', '<cmd>tabprevious<CR>', { desc = 'Go to previous tab' })
 
 -- vim: ts=2 sts=2 sw=2 et

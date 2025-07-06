@@ -27,7 +27,7 @@ vim.api.nvim_create_autocmd({ 'VimResized' }, {
   end,
 })
 
--- go to last loc when opening a buffer
+-- go to last location when opening a buffer
 vim.api.nvim_create_autocmd('BufReadPost', {
   desc = 'Place cursor in the file where it was last time',
   group = augroup 'last_loc',
@@ -131,6 +131,4 @@ vim.api.nvim_create_autocmd({ 'FileType' }, {
     end)
   end,
 })
-
-require 'maths-lover.utils.mini-files'
 -- vim: ts=2 sts=2 sw=2 et
