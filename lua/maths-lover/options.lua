@@ -33,10 +33,15 @@ vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 vim.opt.expandtab = true
 
+-- fold settings using treesitter
+vim.opt.foldmethod = 'expr'
+vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
+vim.opt.foldcolumn = '1'
+
 -- fold fillchars
 vim.opt.fillchars = {
-  foldopen = '',
-  foldclose = '',
+  foldopen = '',
+  foldclose = '',
   fold = ' ',
   foldsep = ' ',
   diff = '╱',
@@ -45,6 +50,8 @@ vim.opt.fillchars = {
 
 -- fold level to have fold by default
 vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 99
+vim.opt.foldenable = true
 
 -- auto indent
 vim.opt.smartindent = true
@@ -76,7 +83,11 @@ vim.opt.splitbelow = true
 --  See `:help 'list'`
 --  and `:help 'listchars'`
 vim.opt.list = true
-vim.opt.listchars = { tab = ' ', trail = '', nbsp = '␣' }
+vim.opt.listchars = {
+  tab = ' ',
+  trail = '',
+  nbsp = '␣'
+}
 
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = 'split'
