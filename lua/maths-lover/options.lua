@@ -9,7 +9,7 @@ vim.opt.relativenumber = true
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
 
--- Don't show the mode, since it's already in the status line
+-- show the current mode as I'm not using status line plugins
 vim.opt.showmode = true
 
 -- set statusline behaviour
@@ -103,9 +103,6 @@ vim.opt.scrolloff = 10
 
 -- automatically chdir to the current file
 vim.opt.autochdir = false
-
--- setting this false as lualine will show it and this way it won't pollute noice notifications
-vim.opt.showmode = false
 
 -- set autoread to automatically detect changes once a file has been changed by another program (e.g., formatters)
 vim.opt.autoread = true
