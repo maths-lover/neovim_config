@@ -51,21 +51,11 @@ vim.api.nvim_create_autocmd('FileType', {
   desc = 'Close some non editing buffer with just q',
   group = augroup 'close_with_q',
   pattern = {
-    'PlenaryTestPopup',
-    'grug-far',
     'help',
     'lspinfo',
-    'notify',
     'qf',
-    'spectre_panel',
     'startuptime',
-    'tsplayground',
-    'neotest-output',
     'checkhealth',
-    'neotest-summary',
-    'neotest-output-panel',
-    'dbout',
-    'gitsigns.blame',
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
@@ -125,7 +115,6 @@ vim.api.nvim_create_autocmd({ 'FileType' }, {
   group = augroup 'bigfile',
   pattern = 'bigfile',
   callback = function(ev)
-    vim.b.minianimate_disable = true
     vim.schedule(function()
       vim.bo[ev.buf].syntax = vim.filetype.match { buf = ev.buf } or ''
     end)

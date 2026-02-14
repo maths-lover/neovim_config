@@ -23,7 +23,6 @@ vim.opt.clipboard = vim.env.SSH_TTY and '' or 'unnamedplus'
 -- Enable break indent
 vim.opt.breakindent = true
 
--- NOTE: following is now set by nvim-cmp
 -- behaviour of completion menu
 vim.opt.completeopt = 'menu,menuone,noselect'
 vim.opt.shortmess:append 'cs'
@@ -33,9 +32,9 @@ vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 vim.opt.expandtab = true
 
--- fold settings using treesitter
+-- fold settings (uses built-in treesitter foldexpr)
 vim.opt.foldmethod = 'expr'
-vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
+vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 vim.opt.foldcolumn = '1'
 
 -- fold fillchars
@@ -106,9 +105,6 @@ vim.opt.autochdir = false
 
 -- set autoread to automatically detect changes once a file has been changed by another program (e.g., formatters)
 vim.opt.autoread = true
-
--- custom handlers for lsp hover
-vim.g.lsp_handlers_enabled = true
 
 -- set the bigfile size to avoid loading plugins for those files
 vim.g.bigfile_size = 1024 * 1024 * 1.5 -- 1.5 MB
