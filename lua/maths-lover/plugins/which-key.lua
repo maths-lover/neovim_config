@@ -10,6 +10,8 @@ return {
     spec = {
       { '<leader>s', group = 'Search' },
       { '<leader>c', group = 'Code' },
+      { '<leader>h', group = 'Hunk (git)' },
+      { '<leader>g', group = 'Git' },
       { '<leader>t', group = 'Tabs' },
     },
   },

@@ -9,11 +9,11 @@ vim.opt.relativenumber = true
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
 
--- show the current mode as I'm not using status line plugins
-vim.opt.showmode = true
+-- mode is shown by lualine, no need to duplicate
+vim.opt.showmode = false
 
--- set statusline behaviour
-vim.opt.laststatus = 2
+-- global statusline (single bar across all splits)
+vim.opt.laststatus = 3
 
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
@@ -39,8 +39,8 @@ vim.opt.foldcolumn = '1'
 
 -- fold fillchars
 vim.opt.fillchars = {
-  foldopen = '',
-  foldclose = '',
+  foldopen = '\u{f107}',
+  foldclose = '\u{f054}',
   fold = ' ',
   foldsep = ' ',
   diff = '╱',
@@ -78,14 +78,14 @@ vim.opt.timeoutlen = 300
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
--- Sets how neovim will display certain whitespace characters in the editor.
---  See `:help 'list'`
---  and `:help 'listchars'`
+-- Show whitespace characters visually
 vim.opt.list = true
 vim.opt.listchars = {
-  tab = ' ',
-  trail = '',
-  nbsp = '␣'
+  tab = '→ ',
+  trail = '·',
+  nbsp = '␣',
+  eol = '↵',
+  lead = '·',
 }
 
 -- Preview substitutions live, as you type!
