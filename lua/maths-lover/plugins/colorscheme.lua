@@ -1,16 +1,20 @@
 return {
-  -- Primary: modern noir theme (local plugin)
+  -- Primary: rose-pine
   {
-    dir = '~/Develop/projects/pinot_noir.nvim',
+    'rose-pine/neovim',
+    name = 'rose-pine',
     lazy = false,
     priority = 1000,
-    dependencies = { 'tjdevries/colorbuddy.nvim' },
     config = function()
-      vim.cmd.colorscheme 'pinot_noir'
+      vim.cmd.colorscheme 'rose-pine'
     end,
   },
 
-  { 'rose-pine/neovim', name = 'rose-pine', lazy = true },
+  {
+    dir = '~/Develop/projects/pinot_noir.nvim',
+    lazy = true,
+    dependencies = { 'tjdevries/colorbuddy.nvim' },
+  },
   { 'ellisonleao/gruvbox.nvim', lazy = true },
   { 'shaunsingh/nord.nvim', lazy = true },
 }
