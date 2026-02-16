@@ -15,6 +15,7 @@ return {
     lazy = true,
     dependencies = { 'tjdevries/colorbuddy.nvim' },
   },
+  { 'mellow-theme/mellow.nvim', lazy = true },
   { 'ellisonleao/gruvbox.nvim', lazy = true },
   { 'shaunsingh/nord.nvim', lazy = true },
 }
