@@ -15,6 +15,7 @@ return {
     formatters_by_ft = {
       dart = { 'dart_format' },
       lua = { 'stylua' },
+      python = { 'ruff_format' },
     },
     format_on_save = {
       timeout_ms = 500,
