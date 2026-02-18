@@ -8,7 +8,7 @@ return {
       sources = {
         default = { 'lsp', 'path', 'snippets', 'buffer' },
       },
-      signature = { enabled = true },
+      signature = { enabled = false },
       appearance = {
         use_nvim_cmp_as_default = false,
         nerd_font_variant = 'mono',

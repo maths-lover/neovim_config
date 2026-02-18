@@ -12,9 +12,6 @@ vim.opt.mouse = 'a'
 -- mode is shown by lualine, no need to duplicate
 vim.opt.showmode = false
 
--- global statusline (single bar across all splits)
-vim.opt.laststatus = 3
-
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
