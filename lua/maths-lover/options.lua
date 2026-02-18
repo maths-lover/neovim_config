@@ -12,6 +12,9 @@ vim.opt.mouse = 'a'
 -- mode is shown by lualine, no need to duplicate
 vim.opt.showmode = false
 
+-- cmdheight to save space at the bottom
+vim.opt.cmdheight = 0
+
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
