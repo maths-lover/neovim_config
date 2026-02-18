@@ -14,6 +14,7 @@ return {
   opts = {
     formatters_by_ft = {
       dart = { 'dart_format' },
+      go = { 'goimports' },
       lua = { 'stylua' },
       python = { 'ruff_format' },
     },
