@@ -27,10 +27,10 @@ return {
           -- Code actions (under <leader>c)
           map('<leader>ca', vim.lsp.buf.code_action, 'Code action', { 'n', 'v' })
           map('<leader>cr', vim.lsp.buf.rename, 'Rename symbol')
-          map('<leader>cd', vim.diagnostic.open_float, 'Line diagnostics')
+          map('<leader>cl', vim.diagnostic.open_float, 'Line diagnostics')
           map('<leader>cs', builtin.lsp_document_symbols, 'Document symbols')
           map('<leader>cS', builtin.lsp_dynamic_workspace_symbols, 'Workspace symbols')
-          map('<leader>cD', builtin.lsp_type_definitions, 'Type definition')
+          map('<leader>ct', builtin.lsp_type_definitions, 'Type definition')
         end,
       })
     end,

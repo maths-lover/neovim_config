@@ -18,14 +18,19 @@
         ├── treesitter.lua             # Syntax, textobjects, context
         ├── which-key.lua              # Keymap discovery popup
         ├── telescope.lua              # Fuzzy finder (rg + fd)
-        ├── lsp.lua                    # LSP + flutter-tools
+        ├── lsp.lua                    # LSP keymaps + flutter-tools
         ├── completion.lua             # blink.cmp + snippets
-        ├── colorscheme.lua            # pinot_noir, rose-pine, gruvbox, nord
+        ├── colorscheme.lua            # pinot_noir, rose-pine, gruvbox, mellow, nord
         ├── git.lua                    # gitsigns + diffview
         ├── oil.lua                    # File explorer
         ├── conform.lua                # Auto-formatter
         ├── todo-comments.lua          # TODO/FIXME highlighter
-        └── lualine.lua                # Statusline
+        ├── lualine.lua                # Statusline (via tpipeline to tmux)
+        ├── tmux.lua                   # vim-tpipeline (tmux statusline)
+        ├── noice.lua                  # Enhanced UI (cmdline, notifications)
+        ├── trouble.lua                # Diagnostics list + navigation
+        ├── python.lua                 # basedpyright + ruff LSP
+        └── go.lua                     # gopls LSP
 ```
 
 ## Core Settings (options.lua)
@@ -39,7 +44,8 @@
 | Clipboard | Synced with OS | Disabled over SSH |
 | Folds | Treesitter-based | All open by default (foldlevel=99) |
 | Signcolumn | 2 columns | For gitsigns + diagnostics |
-| Statusline | Global (laststatus=3) | Single bar across all splits |
+| Statusline | laststatus=0 | Rendered in tmux via tpipeline |
+| Cmdheight | 0 | Cmdline replaced by noice.nvim popup |
 | Showmode | Off | Lualine shows mode instead |
 | Scrolloff | 10 lines | |
 | Undo | Persistent (undofile) | |
@@ -78,7 +84,15 @@
 | oil.nvim | File explorer (edit filesystem as buffer) | Eager |
 | conform.nvim | Code formatter (format on save) | BufWritePre |
 | todo-comments.nvim | Highlight TODO/FIXME/HACK in comments | BufReadPre |
-| lualine.nvim | Statusline | Eager |
+| lualine.nvim | Statusline (rendered in tmux via tpipeline) | Eager |
+| vim-tpipeline | Embeds Neovim statusline in tmux | Eager |
+| noice.nvim | Enhanced cmdline, search, notifications | VeryLazy |
+| nui.nvim | UI component library (noice dependency) | — |
+| nvim-notify | Notification manager (noice dependency) | — |
+| trouble.nvim | Diagnostics list + navigation | On command/key |
+| basedpyright | Python type checking + intellisense (via LSP) | ft=python |
+| ruff | Python linting + code actions (via LSP) | ft=python |
+| gopls | Go LSP server | ft=go |
 | plenary.nvim | Lua utility library (dependency) | — |
 | nvim-web-devicons | File icons (dependency) | — |
 
@@ -183,11 +197,13 @@ These activate when an LSP server attaches to a buffer.
 | `K` | n | Hover documentation | vim.lsp |
 | `<leader>ca` | n, v | Code action | vim.lsp |
 | `<leader>cr` | n | Rename symbol | vim.lsp |
-| `<leader>cd` | n | Line diagnostics (float) | vim.diagnostic |
+| `<leader>cl` | n | Line diagnostics (float) | vim.diagnostic |
 | `<leader>cs` | n | Document symbols | Telescope |
 | `<leader>cS` | n | Workspace symbols | Telescope |
-| `<leader>cD` | n | Type definition | Telescope |
+| `<leader>ct` | n | Type definition | Telescope |
 | `<leader>cf` | n | Format buffer | conform.nvim |
+| `<leader>cd` | n | Diagnostics list (Trouble) | trouble.nvim |
+| `<leader>cD` | n | Buffer diagnostics (Trouble) | trouble.nvim |
 
 ### Treesitter Text Objects
 
@@ -236,6 +252,16 @@ These activate when an LSP server attaches to a buffer.
 | `<leader>co` | Accept ours |
 | `<leader>ct` | Accept theirs |
 | `<leader>cb` | Accept base |
+
+### Diagnostics Navigation (trouble.nvim)
+
+| Key | Mode | Action |
+|-----|------|--------|
+| `]d` / `[d` | n | Next/previous diagnostic |
+| `]e` / `[e` | n | Next/previous error |
+| `]w` / `[w` | n | Next/previous warning |
+| `<leader>cd` | n | Toggle diagnostics list |
+| `<leader>cD` | n | Toggle buffer diagnostics |
 
 ### TODO Navigation
 
@@ -320,6 +346,10 @@ Switch with live preview: `<leader>sC`
 | fd | telescope find_files | `brew install fd` |
 | C compiler | telescope-fzf-native | Xcode CLT / gcc |
 | dart / flutter SDK | flutter-tools, dartls | flutter.dev |
+| go / gopls | go.lua LSP | go.dev |
+| goimports | conform (go formatting) | `go install golang.org/x/tools/cmd/goimports@latest` |
+| basedpyright | python.lua LSP | `pip install basedpyright` |
+| ruff | python.lua linting + conform formatting | `pip install ruff` |
 | stylua | conform (lua formatting) | `brew install stylua` |
 | Python 3 (pyenv) | python3_host_prog | Already configured |
 | Nerd Font | Icons everywhere | Already installed |

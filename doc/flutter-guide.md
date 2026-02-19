@@ -77,7 +77,7 @@ You'll see a brief notification in the statusline when dartls finishes analyzing
 | Go to references | `gr` | See everywhere a symbol is used |
 | Go to implementation | `gi` | Jump to implementation of an interface |
 | Go to declaration | `gD` | Go to declaration |
-| Type definition | `<leader>cD` | Jump to the type's definition |
+| Type definition | `<leader>ct` | Jump to the type's definition |
 | Document symbols | `<leader>cs` | Browse all symbols in current file |
 | Workspace symbols | `<leader>cS` | Search symbols across entire project |
 | Treesitter symbols | `<leader>st` | Functions/classes in current file |
@@ -180,7 +180,9 @@ In visual mode, select a block of code then `<leader>ca` to extract it as a widg
 
 | Action | Keys |
 |--------|------|
-| Line diagnostics (float) | `<leader>cd` |
+| Line diagnostics (float) | `<leader>cl` |
+| Diagnostics list (Trouble) | `<leader>cd` |
+| Buffer diagnostics (Trouble) | `<leader>cD` |
 | All diagnostics (telescope) | `<leader>sd` |
 
 Errors and warnings appear:
@@ -188,7 +190,12 @@ Errors and warnings appear:
 - As **virtual text** at the end of the line
 - In the **statusline** (lualine diagnostics component)
 
-Navigate between diagnostics using the built-in `[d` / `]d` (Neovim default) or search all with `<leader>sd`.
+Navigate between diagnostics with trouble.nvim:
+- `]d` / `[d` — next/previous diagnostic
+- `]e` / `[e` — next/previous error
+- `]w` / `[w` — next/previous warning
+
+Or search all with `<leader>sd` (Telescope).
 
 ---
 
@@ -516,7 +523,7 @@ flutter create --template=plugin my_plugin
 
 1. Navigate to code: `<leader>sg` to grep, or `gd` to follow a definition
 2. Edit the code — completion with `<C-y>`, snippets with `<Tab>`
-3. Check for errors: `<leader>cd` for current line, `<leader>sd` for all
+3. Check for errors: `<leader>cl` for current line, `<leader>cd` for diagnostics list
 4. Use code actions: `<leader>ca` to wrap widgets, extract methods, fix imports
 5. Save: `:w` (auto-formats)
 
