@@ -74,9 +74,10 @@
 | flutter-tools.nvim | Dart/Flutter LSP + widget enhancements | ft=dart |
 | blink.cmp | Autocompletion | With lspconfig |
 | friendly-snippets | VSCode-format snippet collection | With blink.cmp |
-| pinot_noir.nvim | Primary colorscheme (local, noir style) | Eager, priority=1000 |
+| rose-pine | Primary colorscheme | Eager, priority=1000 |
+| pinot_noir.nvim | Colorscheme (local, noir style) | Lazy |
 | colorbuddy.nvim | Colorscheme helper (pinot_noir dependency) | With pinot_noir |
-| rose-pine | Colorscheme (alternative) | Lazy |
+| mellow.nvim | Colorscheme (alternative) | Lazy |
 | gruvbox.nvim | Colorscheme (alternative) | Lazy |
 | nord.nvim | Colorscheme (alternative) | Lazy |
 | gitsigns.nvim | Git signs in gutter, hunk operations | BufReadPre |
@@ -326,10 +327,11 @@ To create: add a new line with a filename, then `:w`
 
 ## Colorschemes
 
-**Primary:** `pinot_noir` — A modern noir theme. Pure black background, grayscale foreground palette, red accents for numbers/errors. Full treesitter + LSP highlight support.
+**Primary:** `rose-pine` — Elegant theme with muted colors.
 
 **Alternatives (lazy-loaded):**
-- `:colorscheme rose-pine`
+- `:colorscheme pinot_noir` (local plugin, noir style)
+- `:colorscheme mellow`
 - `:colorscheme gruvbox`
 - `:colorscheme nord`
 
