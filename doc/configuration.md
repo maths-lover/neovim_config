@@ -25,8 +25,7 @@
         ├── oil.lua                    # File explorer
         ├── conform.lua                # Auto-formatter
         ├── todo-comments.lua          # TODO/FIXME highlighter
-        ├── lualine.lua                # Statusline (via tpipeline to tmux)
-        ├── tmux.lua                   # vim-tpipeline (tmux statusline)
+        ├── lualine.lua                # Statusline
         ├── noice.lua                  # Enhanced UI (cmdline, notifications)
         ├── trouble.lua                # Diagnostics list + navigation
         ├── python.lua                 # basedpyright + ruff LSP
@@ -44,7 +43,7 @@
 | Clipboard | Synced with OS | Disabled over SSH |
 | Folds | Treesitter-based | All open by default (foldlevel=99) |
 | Signcolumn | 2 columns | For gitsigns + diagnostics |
-| Statusline | laststatus=0 | Rendered in tmux via tpipeline |
+| Statusline | laststatus=2 | Default (lualine renders in Neovim) |
 | Cmdheight | 0 | Cmdline replaced by noice.nvim popup |
 | Showmode | Off | Lualine shows mode instead |
 | Scrolloff | 10 lines | |
@@ -85,8 +84,7 @@
 | oil.nvim | File explorer (edit filesystem as buffer) | Eager |
 | conform.nvim | Code formatter (format on save) | BufWritePre |
 | todo-comments.nvim | Highlight TODO/FIXME/HACK in comments | BufReadPre |
-| lualine.nvim | Statusline (rendered in tmux via tpipeline) | Eager |
-| vim-tpipeline | Embeds Neovim statusline in tmux | Eager |
+| lualine.nvim | Statusline | Eager |
 | noice.nvim | Enhanced cmdline, search, notifications | VeryLazy |
 | nui.nvim | UI component library (noice dependency) | — |
 | nvim-notify | Notification manager (noice dependency) | — |

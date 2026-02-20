@@ -4,11 +4,6 @@ return {
   dependencies = { 'nvim-tree/nvim-web-devicons' },
   config = function(_, opts)
     require('lualine').setup(opts)
-    -- deferred: lualine sets laststatus=2 during setup and may have
-    -- scheduled callbacks that re-set it; defer to run after all of them
-    vim.defer_fn(function()
-      vim.o.laststatus = 0
-    end, 50)
   end,
   opts = {
     options = {
