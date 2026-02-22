@@ -7,6 +7,8 @@ vim.g.have_nerd_font = true
 
 require 'maths-lover.options'
 
+require 'maths-lover.neovide'
+
 require 'maths-lover.keymaps'
 
 require 'maths-lover.autocmds'
