@@ -13,6 +13,7 @@ return {
       { '<leader>h', group = 'Hunk (git)' },
       { '<leader>g', group = 'Git' },
       { '<leader>t', group = 'Tabs' },
+      { '<leader>mc', group = 'Merge conflict' },
     },
   },
   keys = {

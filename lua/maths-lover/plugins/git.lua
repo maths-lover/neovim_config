@@ -62,6 +62,25 @@ return {
       { '<leader>gd', '<cmd>DiffviewOpen<CR>', desc = 'Diff view (working tree)' },
       { '<leader>gh', '<cmd>DiffviewFileHistory %<CR>', desc = 'File history (current)' },
       { '<leader>gq', '<cmd>DiffviewClose<CR>', desc = 'Close diff view' },
+      { '<leader>gm', '<cmd>DiffviewOpen<CR>', desc = 'Merge view (during merge)' },
+    },
+  },
+
+  {
+    'akinsho/git-conflict.nvim',
+    version = '*',
+    event = 'BufReadPre',
+    opts = {
+      default_mappings = false,
+    },
+    keys = {
+      { '<leader>mco', '<Plug>(git-conflict-ours)', desc = 'Choose ours' },
+      { '<leader>mct', '<Plug>(git-conflict-theirs)', desc = 'Choose theirs' },
+      { '<leader>mcb', '<Plug>(git-conflict-both)', desc = 'Choose both' },
+      { '<leader>mcn', '<Plug>(git-conflict-none)', desc = 'Choose none' },
+      { ']x', '<Plug>(git-conflict-next-conflict)', desc = 'Next conflict' },
+      { '[x', '<Plug>(git-conflict-prev-conflict)', desc = 'Previous conflict' },
+      { '<leader>mcl', '<cmd>GitConflictListQf<CR>', desc = 'List conflicts (qf)' },
     },
   },
 }
