@@ -1,4 +1,4 @@
-vim.g.python3_host_prog = '/Users/surajp/.pyenv/versions/nvim-provider/bin/python'
+vim.g.python3_host_prog = '/Users/surajp/.local/share/nvim/nvim-provider/bin/python'
 
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
