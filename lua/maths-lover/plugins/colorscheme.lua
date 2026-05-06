@@ -1,13 +1,38 @@
+local function set_theme(mode)
+  if mode == 'light' then
+    vim.o.background = 'light'
+    vim.cmd.colorscheme 'flexoki-light'
+  else
+    vim.o.background = 'dark'
+    vim.cmd.colorscheme 'rose-pine'
+  end
+end
+
+local function toggle_theme()
+  set_theme(vim.o.background == 'dark' and 'light' or 'dark')
+end
+
 return {
-  -- Primary: rose-pine
+  -- Primary light: flexoki
+  {
+    'kepano/flexoki-neovim',
+    name = 'flexoki',
+    lazy = false,
+    priority = 1000,
+    config = function()
+      set_theme 'light'
+    end,
+    keys = {
+      { '<leader>tt', toggle_theme, desc = 'Toggle light/dark theme' },
+    },
+  },
+
+  -- Dark companion: rose-pine (eager so the toggle can switch instantly)
   {
     'rose-pine/neovim',
     name = 'rose-pine',
     lazy = false,
-    priority = 1000,
-    config = function()
-      vim.cmd.colorscheme 'rose-pine'
-    end,
+    priority = 999,
   },
 
   {
