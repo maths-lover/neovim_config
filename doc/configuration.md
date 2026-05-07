@@ -296,6 +296,55 @@ To create: add a new line with a filename, then `:w`
 
 ---
 
+## Python projects (uv / venv / pyenv)
+
+`plugins/python.lua` resolves a per-project Python interpreter and feeds
+it to both basedpyright (`python.pythonPath`) and ruff
+(`init_options.settings.interpreter`). This is what makes type checking
+and lint diagnostics see installed dependencies.
+
+### Resolution order
+
+When the LSP starts for a Python buffer, the resolver picks the first
+match it finds:
+
+1. **`$VIRTUAL_ENV`** — an already-activated venv wins.
+2. **`<root>/.venv/bin/python`** — uv default; also `python -m venv .venv`.
+3. **`<root>/venv/bin/python`** — common alternative layout.
+4. **pyenv** via `.python-version` → `~/.pyenv/versions/<name>/bin/python`.
+5. System `python3` as a final fallback.
+
+The search is upward-walking, so opening a file deep in a uv project
+still finds the `.venv` at the repo root.
+
+### Typical uv workflow
+
+```sh
+uv init my-project && cd my-project
+uv add requests pydantic         # creates .venv automatically
+nvim main.py                     # basedpyright + ruff resolve to .venv
+```
+
+You don't need to activate the venv — opening nvim from anywhere inside
+the project tree is enough.
+
+### Inspecting the picked interpreter
+
+| Command | Purpose |
+|---------|---------|
+| `:PyInfo` | Print the resolved interpreter and which source picked it (`VIRTUAL_ENV`, `.venv`, `pyenv`, etc.) |
+| `:LspInfo` | Show attached LSP clients for the buffer |
+| `:checkhealth vim.lsp` | LSP health overview |
+
+### Per-project overrides
+
+If you want to override the resolver, drop a `pyrightconfig.json` (or
+`[tool.pyright]` block in `pyproject.toml`) at the project root and set
+`venvPath` / `venv` explicitly — basedpyright honors those over the
+`pythonPath` setting we inject.
+
+---
+
 ## Autocommands
 
 | Event | Action |
@@ -343,8 +392,9 @@ Switch with live preview: `<leader>sC`
 | dart / flutter SDK | flutter-tools, dartls | flutter.dev |
 | go / gopls | go.lua LSP | go.dev |
 | goimports | conform (go formatting) | `go install golang.org/x/tools/cmd/goimports@latest` |
-| basedpyright | python.lua LSP | `pip install basedpyright` |
-| ruff | python.lua linting + conform formatting | `pip install ruff` |
+| basedpyright | python.lua LSP | `uv tool install basedpyright` |
+| ruff | python.lua linting + conform formatting | `uv tool install ruff` |
 | stylua | conform (lua formatting) | `brew install stylua` |
-| Python 3 (pyenv) | python3_host_prog | Already configured |
+| uv | Per-project venv + dependency resolution | `brew install uv` |
+| Python 3 (host) | python3_host_prog | uv-managed nvim-provider venv |
 | Nerd Font | Icons everywhere | Already installed |
