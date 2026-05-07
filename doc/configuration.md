@@ -22,6 +22,7 @@
         ├── completion.lua             # blink.cmp + snippets
         ├── colorscheme.lua            # rose-pine (dark), flexoki (light), and alternates
         ├── git.lua                    # gitsigns + git-conflict
+        ├── lazygit.lua                # lazygit floating TUI
         ├── oil.lua                    # File explorer
         ├── conform.lua                # Auto-formatter
         ├── lualine.lua                # Statusline
@@ -78,6 +79,7 @@
 | nord.nvim | Colorscheme (alternative) | Lazy |
 | gitsigns.nvim | Git signs in gutter, hunk operations | BufReadPre |
 | git-conflict.nvim | Merge conflict resolution helpers | BufReadPre |
+| lazygit.nvim | Floating-window lazygit TUI | On command/key |
 | oil.nvim | File explorer (edit filesystem as buffer) | Eager |
 | conform.nvim | Code formatter (format on save) | BufWritePre |
 | lualine.nvim | Statusline | Eager |
@@ -224,6 +226,17 @@ These activate when an LSP server attaches to a buffer.
 | `<leader>hd` | n | Diff this file |
 | `ih` | o, x | Select hunk (text object) |
 
+### Git — `<leader>g` (lazygit)
+
+| Key | Mode | Action |
+|-----|------|--------|
+| `<leader>gg` | n | Open lazygit (cwd) |
+| `<leader>gG` | n | Open lazygit (current file's repo) |
+| `<leader>gl` | n | Lazygit log filtered to current file |
+
+Lazygit launches in a floating window. On exit, gitsigns auto-refreshes
+so the gutter reflects the new repo state.
+
 ### Merge Conflict — `<leader>mc` (git-conflict.nvim)
 
 | Key | Mode | Action |
@@ -323,6 +336,7 @@ Switch with live preview: `<leader>sC`
 | Tool | Required by | Install |
 |------|-------------|---------|
 | git | gitsigns, git-conflict, telescope | System package manager |
+| lazygit | lazygit.nvim TUI | `brew install lazygit` |
 | ripgrep (rg) | telescope live_grep | `brew install ripgrep` |
 | fd | telescope find_files | `brew install fd` |
 | C compiler | telescope-fzf-native | Xcode CLT / gcc |
