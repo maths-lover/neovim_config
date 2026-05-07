@@ -20,14 +20,11 @@
         ├── telescope.lua              # Fuzzy finder (rg + fd)
         ├── lsp.lua                    # LSP keymaps + flutter-tools
         ├── completion.lua             # blink.cmp + snippets
-        ├── colorscheme.lua            # pinot_noir, rose-pine, gruvbox, mellow, nord
-        ├── git.lua                    # gitsigns + diffview
+        ├── colorscheme.lua            # rose-pine (dark), flexoki (light), and alternates
+        ├── git.lua                    # gitsigns + git-conflict
         ├── oil.lua                    # File explorer
         ├── conform.lua                # Auto-formatter
-        ├── todo-comments.lua          # TODO/FIXME highlighter
         ├── lualine.lua                # Statusline
-        ├── noice.lua                  # Enhanced UI (cmdline, notifications)
-        ├── trouble.lua                # Diagnostics list + navigation
         ├── python.lua                 # basedpyright + ruff LSP
         └── go.lua                     # gopls LSP
 ```
@@ -44,7 +41,7 @@
 | Folds | Treesitter-based | All open by default (foldlevel=99) |
 | Signcolumn | 2 columns | For gitsigns + diagnostics |
 | Statusline | laststatus=2 | Default (lualine renders in Neovim) |
-| Cmdheight | 0 | Cmdline replaced by noice.nvim popup |
+| Cmdheight | 1 | Default; needed for `:!cmd` output visibility |
 | Showmode | Off | Lualine shows mode instead |
 | Scrolloff | 10 lines | |
 | Undo | Persistent (undofile) | |
@@ -80,15 +77,10 @@
 | gruvbox.nvim | Colorscheme (alternative) | Lazy |
 | nord.nvim | Colorscheme (alternative) | Lazy |
 | gitsigns.nvim | Git signs in gutter, hunk operations | BufReadPre |
-| diffview.nvim | Side-by-side diff viewer | On command |
+| git-conflict.nvim | Merge conflict resolution helpers | BufReadPre |
 | oil.nvim | File explorer (edit filesystem as buffer) | Eager |
 | conform.nvim | Code formatter (format on save) | BufWritePre |
-| todo-comments.nvim | Highlight TODO/FIXME/HACK in comments | BufReadPre |
 | lualine.nvim | Statusline | Eager |
-| noice.nvim | Enhanced cmdline, search, notifications | VeryLazy |
-| nui.nvim | UI component library (noice dependency) | — |
-| nvim-notify | Notification manager (noice dependency) | — |
-| trouble.nvim | Diagnostics list + navigation | On command/key |
 | basedpyright | Python type checking + intellisense (via LSP) | ft=python |
 | ruff | Python linting + code actions (via LSP) | ft=python |
 | gopls | Go LSP server | ft=go |
@@ -201,8 +193,8 @@ These activate when an LSP server attaches to a buffer.
 | `<leader>cS` | n | Workspace symbols | Telescope |
 | `<leader>ct` | n | Type definition | Telescope |
 | `<leader>cf` | n | Format buffer | conform.nvim |
-| `<leader>cd` | n | Diagnostics list (Trouble) | trouble.nvim |
-| `<leader>cD` | n | Buffer diagnostics (Trouble) | trouble.nvim |
+| `<leader>cd` | n | Diagnostics list (quickfix) | built-in |
+| `<leader>cD` | n | Buffer diagnostics (quickfix) | built-in |
 
 ### Treesitter Text Objects
 
@@ -232,42 +224,28 @@ These activate when an LSP server attaches to a buffer.
 | `<leader>hd` | n | Diff this file |
 | `ih` | o, x | Select hunk (text object) |
 
-### Git — `<leader>g` (diffview)
+### Merge Conflict — `<leader>mc` (git-conflict.nvim)
 
 | Key | Mode | Action |
 |-----|------|--------|
-| `<leader>gd` | n | Open diff view (working tree vs index) |
-| `<leader>gh` | n | File history for current file |
-| `<leader>gq` | n | Close diff view |
+| `]x` / `[x` | n | Next/previous conflict |
+| `<leader>mco` | n | Choose ours |
+| `<leader>mct` | n | Choose theirs |
+| `<leader>mcb` | n | Choose both |
+| `<leader>mcn` | n | Choose none |
+| `<leader>mcl` | n | List conflicts in quickfix |
 
-**Inside diffview:**
+> Full-tree git workflows (status, log, diff, stage, commit) are handled outside Neovim via lazygit.
 
-| Key | Action |
-|-----|--------|
-| `<tab>` / `<s-tab>` | Cycle files |
-| `s` / `-` | Stage/unstage entry |
-| `S` / `U` | Stage/unstage all |
-| `[x` / `]x` | Previous/next conflict |
-| `<leader>co` | Accept ours |
-| `<leader>ct` | Accept theirs |
-| `<leader>cb` | Accept base |
-
-### Diagnostics Navigation (trouble.nvim)
+### Diagnostics Navigation (built-in)
 
 | Key | Mode | Action |
 |-----|------|--------|
 | `]d` / `[d` | n | Next/previous diagnostic |
 | `]e` / `[e` | n | Next/previous error |
 | `]w` / `[w` | n | Next/previous warning |
-| `<leader>cd` | n | Toggle diagnostics list |
-| `<leader>cD` | n | Toggle buffer diagnostics |
-
-### TODO Navigation
-
-| Key | Mode | Action |
-|-----|------|--------|
-| `]t` / `[t` | n | Next/previous TODO comment |
-| `<leader>sT` | n | Search all TODOs (Telescope) |
+| `<leader>cd` | n | All diagnostics → quickfix |
+| `<leader>cD` | n | Buffer diagnostics → quickfix |
 
 ### File Explorer (oil.nvim)
 
@@ -325,7 +303,10 @@ To create: add a new line with a filename, then `:w`
 
 ## Colorschemes
 
-**Primary:** `rose-pine` — Elegant theme with muted colors.
+**Default (light):** `flexoki-light`
+**Toggle:** `<leader>tt` flips between `flexoki-light` and `rose-pine` (dark).
+
+Both load eagerly so the toggle is instant.
 
 **Alternatives (lazy-loaded):**
 - `:colorscheme pinot_noir` (local plugin, noir style)
@@ -341,7 +322,7 @@ Switch with live preview: `<leader>sC`
 
 | Tool | Required by | Install |
 |------|-------------|---------|
-| git | gitsigns, diffview, telescope | System package manager |
+| git | gitsigns, git-conflict, telescope | System package manager |
 | ripgrep (rg) | telescope live_grep | `brew install ripgrep` |
 | fd | telescope find_files | `brew install fd` |
 | C compiler | telescope-fzf-native | Xcode CLT / gcc |

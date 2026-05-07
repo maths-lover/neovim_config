@@ -80,4 +80,21 @@ vim.keymap.set('n', '<leader>N', '<cmd>tabnew<CR>', { desc = 'Create a buffer in
 vim.keymap.set('n', '<leader><tab>', '<cmd>tabnext<CR>', { desc = 'Go to next tab' })
 vim.keymap.set('n', '<leader><S-tab>', '<cmd>tabprevious<CR>', { desc = 'Go to previous tab' })
 
+-- Diagnostic navigation (built-in vim.diagnostic)
+local goto_diag = function(direction, severity)
+  return function()
+    vim.diagnostic.jump { count = direction, severity = severity, float = true }
+  end
+end
+vim.keymap.set('n', ']d', goto_diag(1), { desc = 'Next diagnostic' })
+vim.keymap.set('n', '[d', goto_diag(-1), { desc = 'Previous diagnostic' })
+vim.keymap.set('n', ']e', goto_diag(1, vim.diagnostic.severity.ERROR), { desc = 'Next error' })
+vim.keymap.set('n', '[e', goto_diag(-1, vim.diagnostic.severity.ERROR), { desc = 'Previous error' })
+vim.keymap.set('n', ']w', goto_diag(1, vim.diagnostic.severity.WARN), { desc = 'Next warning' })
+vim.keymap.set('n', '[w', goto_diag(-1, vim.diagnostic.severity.WARN), { desc = 'Previous warning' })
+vim.keymap.set('n', '<leader>cd', vim.diagnostic.setqflist, { desc = 'Diagnostics (quickfix)' })
+vim.keymap.set('n', '<leader>cD', function()
+  vim.diagnostic.setqflist { open = true, bufnr = 0 }
+end, { desc = 'Buffer diagnostics (quickfix)' })
+
 -- vim: ts=2 sts=2 sw=2 et

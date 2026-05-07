@@ -56,17 +56,6 @@ return {
   },
 
   {
-    'sindrets/diffview.nvim',
-    cmd = { 'DiffviewOpen', 'DiffviewFileHistory', 'DiffviewClose' },
-    keys = {
-      { '<leader>gd', '<cmd>DiffviewOpen<CR>', desc = 'Diff view (working tree)' },
-      { '<leader>gh', '<cmd>DiffviewFileHistory %<CR>', desc = 'File history (current)' },
-      { '<leader>gq', '<cmd>DiffviewClose<CR>', desc = 'Close diff view' },
-      { '<leader>gm', '<cmd>DiffviewOpen<CR>', desc = 'Merge view (during merge)' },
-    },
-  },
-
-  {
     'akinsho/git-conflict.nvim',
     version = '*',
     event = 'BufReadPre',
