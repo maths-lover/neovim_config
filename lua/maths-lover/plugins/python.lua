@@ -3,8 +3,7 @@
 ---   1. $VIRTUAL_ENV (an already-activated venv wins)
 ---   2. <root>/.venv/bin/python (uv default, also `python -m venv .venv`)
 ---   3. <root>/venv/bin/python  (common alternative)
----   4. pyenv via .python-version → ~/.pyenv/versions/<name>/bin/python
----   5. system python3
+---   4. system python3
 ---@param start_path string? directory to start from (defaults to cwd)
 ---@return string python_path absolute path to the python binary
 ---@return string source short label describing where the path came from
@@ -32,22 +31,7 @@ local function resolve_python(start_path)
     end
   end
 
-  -- 4. pyenv .python-version
-  local version_file = vim.fs.find('.python-version', { path = path, upward = true, type = 'file' })[1]
-  if version_file then
-    local lines = vim.fn.readfile(version_file, '', 1)
-    if lines and #lines > 0 then
-      local venv_name = vim.trim(lines[1])
-      if venv_name ~= '' then
-        local pyenv_python = vim.fn.expand('~/.pyenv/versions/' .. venv_name .. '/bin/python')
-        if vim.uv.fs_stat(pyenv_python) then
-          return pyenv_python, 'pyenv'
-        end
-      end
-    end
-  end
-
-  -- 5. system fallback
+  -- 4. system fallback
   return vim.fn.exepath 'python3' or 'python3', 'system'
 end
 
@@ -113,7 +97,7 @@ vim.lsp.enable { 'basedpyright', 'ruff' }
 
 -- :PyInfo prints the interpreter and source the LSPs are using for the
 -- current buffer. Handy for debugging when type-checking looks off in a
--- uv/pyenv project.
+-- uv/venv project.
 vim.api.nvim_create_user_command('PyInfo', function()
   local interp = vim.b._python_interpreter
   local source = vim.b._python_source

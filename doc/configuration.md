@@ -296,7 +296,7 @@ To create: add a new line with a filename, then `:w`
 
 ---
 
-## Python projects (uv / venv / pyenv)
+## Python projects (uv / venv)
 
 `plugins/python.lua` resolves a per-project Python interpreter and feeds
 it to both basedpyright (`python.pythonPath`) and ruff
@@ -311,8 +311,7 @@ match it finds:
 1. **`$VIRTUAL_ENV`** — an already-activated venv wins.
 2. **`<root>/.venv/bin/python`** — uv default; also `python -m venv .venv`.
 3. **`<root>/venv/bin/python`** — common alternative layout.
-4. **pyenv** via `.python-version` → `~/.pyenv/versions/<name>/bin/python`.
-5. System `python3` as a final fallback.
+4. System `python3` as a final fallback.
 
 The search is upward-walking, so opening a file deep in a uv project
 still finds the `.venv` at the repo root.
@@ -332,7 +331,7 @@ the project tree is enough.
 
 | Command | Purpose |
 |---------|---------|
-| `:PyInfo` | Print the resolved interpreter and which source picked it (`VIRTUAL_ENV`, `.venv`, `pyenv`, etc.) |
+| `:PyInfo` | Print the resolved interpreter and which source picked it (`VIRTUAL_ENV`, `.venv`, `venv`, `system`) |
 | `:LspInfo` | Show attached LSP clients for the buffer |
 | `:checkhealth vim.lsp` | LSP health overview |
 
