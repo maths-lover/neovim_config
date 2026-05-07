@@ -20,7 +20,7 @@
         ├── telescope.lua              # Fuzzy finder (rg + fd)
         ├── lsp.lua                    # LSP keymaps + flutter-tools
         ├── completion.lua             # blink.cmp + snippets
-        ├── colorscheme.lua            # rose-pine (dark), flexoki (light), and alternates
+        ├── colorscheme.lua            # rose-pine (main + dawn variants) and alternates
         ├── git.lua                    # gitsigns + git-conflict
         ├── lazygit.lua                # lazygit floating TUI
         ├── oil.lua                    # File explorer
@@ -71,11 +71,9 @@
 | flutter-tools.nvim | Dart/Flutter LSP + widget enhancements | ft=dart |
 | blink.cmp | Autocompletion | With lspconfig |
 | friendly-snippets | VSCode-format snippet collection | With blink.cmp |
-| rose-pine | Primary colorscheme | Eager, priority=1000 |
+| rose-pine | Primary colorscheme (main = dark, dawn = light) | Eager, priority=1000 |
 | pinot_noir.nvim | Colorscheme (local, noir style) | Lazy |
 | colorbuddy.nvim | Colorscheme helper (pinot_noir dependency) | With pinot_noir |
-| mellow.nvim | Colorscheme (alternative) | Lazy |
-| gruvbox.nvim | Colorscheme (alternative) | Lazy |
 | nord.nvim | Colorscheme (alternative) | Lazy |
 | gitsigns.nvim | Git signs in gutter, hunk operations | BufReadPre |
 | git-conflict.nvim | Merge conflict resolution helpers | BufReadPre |
@@ -364,15 +362,11 @@ If you want to override the resolver, drop a `pyrightconfig.json` (or
 
 ## Colorschemes
 
-**Default (light):** `flexoki-light`
-**Toggle:** `<leader>tt` flips between `flexoki-light` and `rose-pine` (dark).
-
-Both load eagerly so the toggle is instant.
+**Default (dark):** `rose-pine-main`
+**Toggle:** `<leader>tt` flips between `rose-pine-main` (dark) and `rose-pine-dawn` (light). Both ship with the same plugin, so the toggle is instant.
 
 **Alternatives (lazy-loaded):**
 - `:colorscheme pinot_noir` (local plugin, noir style)
-- `:colorscheme mellow`
-- `:colorscheme gruvbox`
 - `:colorscheme nord`
 
 Switch with live preview: `<leader>sC`
