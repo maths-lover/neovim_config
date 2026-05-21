@@ -3,19 +3,21 @@ return {
   lazy = false,
   dependencies = { 'nvim-tree/nvim-web-devicons' },
   config = function()
-    -- rose-pine palette matching starship.toml
+    -- rose-pine-dawn palette matching starship.toml
     local c = {
-      fg = '#e0def4',
-      bg = '#191724',
-      muted = '#403d52',
-      box = '#6e6a86',
-      blue = '#31748f',
-      cyan = '#9ccfd8',
-      green = '#56949f',
-      orange = '#f6c177',
-      pink = '#ebbcba',
-      purple = '#c4a7e7',
-      red = '#eb6f92',
+      fg = '#575279', -- text (dark) — fg on neutral light pills
+      bg = '#faf4ed', -- base — statusline background
+      muted = '#575279', -- dark text — fg on saturated colored pills (contrast)
+      box = '#dfdad9', -- highlight_med — bg for neutral grey pills (diff, progress)
+      surface = '#cecacd', -- highlight_high — bg for filename / diagnostics pills
+      subtle = '#9893a5', -- muted — fg for inactive / ghost-pill text
+      blue = '#286983', -- pine
+      cyan = '#56949f', -- foam
+      green = '#56949f', -- foam
+      orange = '#ea9d34', -- gold
+      pink = '#d7827e', -- rose
+      purple = '#907aa9', -- iris
+      red = '#b4637a', -- love
     }
 
     -- icons via hex escapes so they survive file writes
@@ -61,7 +63,7 @@ return {
       inactive = {
         a = { bg = c.bg },
         b = { bg = c.bg },
-        c = { fg = c.box, bg = c.bg },
+        c = { fg = c.subtle, bg = c.bg },
       },
     }
 
@@ -100,7 +102,7 @@ return {
             path = 1,
             symbols = { readonly = icons.readonly },
             separator = pill,
-            color = { fg = c.fg, bg = c.muted },
+            color = { fg = c.fg, bg = c.surface },
           },
         },
         lualine_c = {},
@@ -109,7 +111,7 @@ return {
             'diagnostics',
             symbols = { error = icons.error, warn = icons.warn, info = icons.info, hint = icons.hint },
             separator = pill,
-            color = { fg = c.fg, bg = c.muted },
+            color = { fg = c.fg, bg = c.surface },
           },
           {
             'filetype',
@@ -139,7 +141,7 @@ return {
             'filename',
             path = 1,
             separator = pill,
-            color = { fg = c.box, bg = c.muted },
+            color = { fg = c.subtle, bg = c.box },
           },
         },
         lualine_c = {},
@@ -147,7 +149,7 @@ return {
           {
             'location',
             separator = pill,
-            color = { fg = c.box, bg = c.muted },
+            color = { fg = c.subtle, bg = c.box },
           },
         },
         lualine_y = {},

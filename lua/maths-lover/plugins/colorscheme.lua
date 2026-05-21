@@ -19,8 +19,23 @@ return {
     name = 'rose-pine',
     lazy = false,
     priority = 1000,
-    config = function()
-      set_theme 'dark'
+    opts = {
+      -- The default `muted` Comment fg disappears against the CursorLine
+      -- highlight in the dawn variant. `subtle` keeps comments softer than
+      -- code while staying readable on highlighted backgrounds.
+      --
+      -- italic = false on Comment because ComicCode's italic face is a thin
+      -- weight that perceptually fades on light bg even at the right color.
+      styles = { italic = false },
+      highlight_groups = {
+        Comment = { fg = 'subtle', italic = false },
+        ['@comment'] = { fg = 'subtle', italic = false },
+        LineNr = { fg = 'subtle' },
+      },
+    },
+    config = function(_, opts)
+      require('rose-pine').setup(opts)
+      set_theme 'light'
     end,
     keys = {
       { '<leader>tt', toggle_theme, desc = 'Toggle light/dark theme' },
