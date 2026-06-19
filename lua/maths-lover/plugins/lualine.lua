@@ -3,21 +3,21 @@ return {
   lazy = false,
   dependencies = { 'nvim-tree/nvim-web-devicons' },
   config = function()
-    -- rose-pine-dawn palette matching starship.toml
+    -- kanagawa wave palette (dark) — matches the rest of the rice
     local c = {
-      fg = '#575279', -- text (dark) — fg on neutral light pills
-      bg = '#faf4ed', -- base — statusline background
-      muted = '#575279', -- dark text — fg on saturated colored pills (contrast)
-      box = '#dfdad9', -- highlight_med — bg for neutral grey pills (diff, progress)
-      surface = '#cecacd', -- highlight_high — bg for filename / diagnostics pills
-      subtle = '#9893a5', -- muted — fg for inactive / ghost-pill text
-      blue = '#286983', -- pine
-      cyan = '#56949f', -- foam
-      green = '#56949f', -- foam
-      orange = '#ea9d34', -- gold
-      pink = '#d7827e', -- rose
-      purple = '#907aa9', -- iris
-      red = '#b4637a', -- love
+      fg = '#dcd7ba', -- fujiWhite — fg on the neutral statusline bg
+      bg = '#1f1f28', -- sumiInk1 — statusline background
+      muted = '#16161d', -- sumiInk0 (near-black) — fg on saturated colored pills (contrast)
+      box = '#363646', -- sumiInk3 — bg for neutral grey pills (diff, progress)
+      surface = '#54546d', -- sumiInk5 — bg for filename / diagnostics pills
+      subtle = '#727169', -- fujiGray — fg for inactive / ghost-pill text
+      blue = '#7e9cd8', -- crystalBlue
+      cyan = '#7aa89f', -- waveAqua2
+      green = '#98bb6c', -- springGreen
+      orange = '#ffa066', -- surimiOrange
+      pink = '#d27e99', -- sakuraPink
+      purple = '#957fb8', -- oniViolet
+      red = '#e46876', -- waveRed
     }
 
     -- icons via hex escapes so they survive file writes

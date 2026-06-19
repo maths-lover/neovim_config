@@ -31,6 +31,40 @@ return {
           map('<leader>cs', builtin.lsp_document_symbols, 'Document symbols')
           map('<leader>cS', builtin.lsp_dynamic_workspace_symbols, 'Workspace symbols')
           map('<leader>ct', builtin.lsp_type_definitions, 'Type definition')
+
+          local client = vim.lsp.get_client_by_id(event.data.client_id)
+
+          -- Inlay hints (native, 0.10+): on by default, <leader>ch toggles.
+          if client and client:supports_method 'textDocument/inlayHint' then
+            vim.lsp.inlay_hint.enable(true, { bufnr = buf })
+            map('<leader>ch', function()
+              vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = buf }, { bufnr = buf })
+            end, 'Toggle inlay hints')
+          end
+
+          -- Document highlight (native): underline/highlight other uses of the
+          -- symbol under the cursor while it rests there; cleared on move.
+          if client and client:supports_method 'textDocument/documentHighlight' then
+            local hl = vim.api.nvim_create_augroup('maths-lover_lsp_highlight_' .. buf, { clear = true })
+            vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+              group = hl,
+              buffer = buf,
+              callback = vim.lsp.buf.document_highlight,
+            })
+            vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
+              group = hl,
+              buffer = buf,
+              callback = vim.lsp.buf.clear_references,
+            })
+            vim.api.nvim_create_autocmd('LspDetach', {
+              group = vim.api.nvim_create_augroup('maths-lover_lsp_detach_' .. buf, { clear = true }),
+              buffer = buf,
+              callback = function()
+                vim.lsp.buf.clear_references()
+                pcall(vim.api.nvim_clear_autocmds, { group = hl, buffer = buf })
+              end,
+            })
+          end
         end,
       })
     end,

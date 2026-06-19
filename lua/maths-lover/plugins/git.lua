@@ -51,25 +51,13 @@ return {
 
         -- Text object
         map({ 'o', 'x' }, 'ih', gitsigns.select_hunk, { desc = 'Select hunk' })
-      end,
-    },
-  },
 
-  {
-    'akinsho/git-conflict.nvim',
-    version = '*',
-    event = 'BufReadPre',
-    opts = {
-      default_mappings = false,
-    },
-    keys = {
-      { '<leader>mco', '<Plug>(git-conflict-ours)', desc = 'Choose ours' },
-      { '<leader>mct', '<Plug>(git-conflict-theirs)', desc = 'Choose theirs' },
-      { '<leader>mcb', '<Plug>(git-conflict-both)', desc = 'Choose both' },
-      { '<leader>mcn', '<Plug>(git-conflict-none)', desc = 'Choose none' },
-      { ']x', '<Plug>(git-conflict-next-conflict)', desc = 'Next conflict' },
-      { '[x', '<Plug>(git-conflict-prev-conflict)', desc = 'Previous conflict' },
-      { '<leader>mcl', '<cmd>GitConflictListQf<CR>', desc = 'List conflicts (qf)' },
+        -- Blame & quickfix
+        map('n', '<leader>hB', gitsigns.toggle_current_line_blame, { desc = 'Toggle inline blame' })
+        map('n', '<leader>hq', function()
+          gitsigns.setqflist 'all'
+        end, { desc = 'Hunks to quickfix (repo)' })
+      end,
     },
   },
 }

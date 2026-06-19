@@ -1,14 +1,14 @@
 return {
   {
     'saghen/blink.cmp',
-    version = 'v0.*',
+    version = '1.*',
     dependencies = { 'rafamadriz/friendly-snippets' },
     opts = {
       keymap = { preset = 'default' },
       sources = {
         default = { 'lsp', 'path', 'snippets', 'buffer' },
       },
-      signature = { enabled = false },
+      signature = { enabled = true },
       appearance = {
         use_nvim_cmp_as_default = false,
         nerd_font_variant = 'mono',

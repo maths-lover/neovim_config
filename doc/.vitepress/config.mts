@@ -5,6 +5,7 @@ export default defineConfig({
   description: 'Personal Neovim configuration reference',
   themeConfig: {
     nav: [
+      { text: 'Cheatsheet', link: '/cheatsheet' },
       { text: 'Configuration', link: '/configuration' },
       { text: 'Flutter Guide', link: '/flutter-guide' },
     ],
@@ -12,6 +13,7 @@ export default defineConfig({
       {
         text: 'Documentation',
         items: [
+          { text: 'Cheatsheet', link: '/cheatsheet' },
           { text: 'Configuration Reference', link: '/configuration' },
           { text: 'Flutter Guide', link: '/flutter-guide' },
         ],

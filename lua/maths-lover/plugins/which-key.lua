@@ -9,11 +9,12 @@ return {
     },
     spec = {
       { '<leader>s', group = 'Search' },
+      { '<leader>f', group = 'Find/Files' },
       { '<leader>c', group = 'Code' },
       { '<leader>h', group = 'Hunk (git)' },
       { '<leader>g', group = 'Git' },
       { '<leader>t', group = 'Tabs' },
-      { '<leader>mc', group = 'Merge conflict' },
+      { '<leader>m', group = 'Markdown' },
     },
   },
   keys = {

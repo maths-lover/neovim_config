@@ -109,4 +109,25 @@ vim.opt.autoread = true
 -- set the bigfile size to avoid loading plugins for those files
 vim.g.bigfile_size = 1024 * 1024 * 1.5 -- 1.5 MB
 
+-- Rounded borders on every floating window (hover, signature, rename prompt,
+-- diagnostic float, etc). Native global option (0.11+) — no per-plugin config.
+vim.o.winborder = 'rounded'
+
+-- Diagnostics display, configured natively. Inline virtual text, severity
+-- sorting, bordered float, and nerd-font signs matching the lualine icons.
+vim.diagnostic.config {
+  severity_sort = true,
+  virtual_text = { spacing = 2, source = 'if_many' },
+  underline = true,
+  float = { border = 'rounded', source = 'if_many' },
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = '\u{ea87}',
+      [vim.diagnostic.severity.WARN] = '\u{ea6c}',
+      [vim.diagnostic.severity.INFO] = '\u{ea74}',
+      [vim.diagnostic.severity.HINT] = '\u{f0335}',
+    },
+  },
+}
+
 -- vim: ts=2 sts=2 sw=2 et

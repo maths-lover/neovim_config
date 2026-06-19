@@ -3,11 +3,11 @@ if not vim.g.neovide then
 end
 
 -- Font
-vim.o.guifont = 'ComicCodeLigatures Nerd Font:h20'
+vim.o.guifont = 'MonaspaceNeon Nerd Font:h13'
 vim.o.linespace = 2
 
 -- Window appearance
-vim.g.neovide_opacity = 0.93
+vim.g.neovide_opacity = 1.0
 vim.g.neovide_window_blurred = true
 vim.g.neovide_padding_top = 8
 vim.g.neovide_padding_bottom = 8

@@ -53,6 +53,17 @@ return {
       local select = require 'nvim-treesitter-textobjects.select'
       local move = require 'nvim-treesitter-textobjects.move'
       local swap = require 'nvim-treesitter-textobjects.swap'
+      local ts_repeat = require 'nvim-treesitter-textobjects.repeatable_move'
+
+      -- Repeat the last Treesitter move (]m, [m, ]], etc) with ; and , — the
+      -- move.* functions below are auto-tracked, so no wrapping needed. This
+      -- also upgrades the builtin f/t/F/T so ; / , repeat those too.
+      vim.keymap.set({ 'n', 'x', 'o' }, ';', ts_repeat.repeat_last_move, { desc = 'Repeat last move' })
+      vim.keymap.set({ 'n', 'x', 'o' }, ',', ts_repeat.repeat_last_move_opposite, { desc = 'Repeat last move (opposite)' })
+      vim.keymap.set({ 'n', 'x', 'o' }, 'f', ts_repeat.builtin_f_expr, { expr = true })
+      vim.keymap.set({ 'n', 'x', 'o' }, 'F', ts_repeat.builtin_F_expr, { expr = true })
+      vim.keymap.set({ 'n', 'x', 'o' }, 't', ts_repeat.builtin_t_expr, { expr = true })
+      vim.keymap.set({ 'n', 'x', 'o' }, 'T', ts_repeat.builtin_T_expr, { expr = true })
 
       -- Select text objects
       vim.keymap.set({ 'x', 'o' }, 'af', function()

@@ -11,6 +11,10 @@ require 'maths-lover.neovide'
 
 require 'maths-lover.keymaps'
 
+require 'maths-lover.git-terminal'
+
+require 'maths-lover.markdown'
+
 require 'maths-lover.autocmds'
 
 require 'maths-lover.lazy'

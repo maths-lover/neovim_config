@@ -1,33 +1,39 @@
 # Neovim Configuration Reference
 
+> Looking for a fast lookup? See the [Cheatsheet](/cheatsheet) for the
+> most-used keymaps plus native Neovim tricks.
+
 ## Directory Structure
 
 ```
 ~/.config/nvim/
-├── init.lua                          # Entry point
+├── init.lua                          # Entry point (loads modules below)
 ├── doc/
 │   ├── configuration.md              # This file
+│   ├── cheatsheet.md                 # Quick reference + native tricks
 │   └── flutter-guide.md              # Flutter development guide
 └── lua/maths-lover/
-    ├── options.lua                    # Editor settings
-    ├── keymaps.lua                    # Core key mappings
-    ├── autocmds.lua                   # Autocommands
-    ├── lazy.lua                       # Plugin manager bootstrap
+    ├── options.lua                   # Editor settings, winborder, diagnostics
+    ├── keymaps.lua                   # Core key mappings
+    ├── autocmds.lua                  # Autocommands
+    ├── neovide.lua                   # Neovide GUI settings (guarded)
+    ├── git-terminal.lua              # Native floating lazygit terminal
+    ├── lazy.lua                      # Plugin manager bootstrap
     └── plugins/
-        ├── init.lua                   # Empty (specs in individual files)
-        ├── treesitter.lua             # Syntax, textobjects, context
-        ├── which-key.lua              # Keymap discovery popup
-        ├── telescope.lua              # Fuzzy finder (rg + fd)
-        ├── lsp.lua                    # LSP keymaps + flutter-tools
-        ├── completion.lua             # blink.cmp + snippets
-        ├── colorscheme.lua            # rose-pine (main + dawn variants) and alternates
-        ├── git.lua                    # gitsigns + git-conflict
-        ├── lazygit.lua                # lazygit floating TUI
-        ├── oil.lua                    # File explorer
-        ├── conform.lua                # Auto-formatter
-        ├── lualine.lua                # Statusline
-        ├── python.lua                 # basedpyright + ruff LSP
-        └── go.lua                     # gopls LSP
+        ├── init.lua                  # Empty (specs in individual files)
+        ├── treesitter.lua            # Syntax, textobjects, context, repeatable moves
+        ├── which-key.lua             # Keymap discovery popup
+        ├── telescope.lua             # Fuzzy finder (rg + fd)
+        ├── project.lua               # project.nvim — multi-project root switching
+        ├── yazi.lua                  # yazi.nvim — filesystem browser (replaces oil/netrw)
+        ├── lsp.lua                   # LSP keymaps, inlay hints, doc highlight
+        ├── completion.lua            # blink.cmp (1.x) + snippets
+        ├── colorscheme.lua           # rose-pine (main = dark, dawn = light)
+        ├── git.lua                   # gitsigns
+        ├── conform.lua               # Auto-formatter
+        ├── lualine.lua               # Statusline
+        ├── python.lua                # basedpyright + ruff LSP
+        └── go.lua                    # gopls LSP
 ```
 
 ## Core Settings (options.lua)
@@ -41,44 +47,50 @@
 | Clipboard | Synced with OS | Disabled over SSH |
 | Folds | Treesitter-based | All open by default (foldlevel=99) |
 | Signcolumn | 2 columns | For gitsigns + diagnostics |
-| Statusline | laststatus=2 | Default (lualine renders in Neovim) |
-| Cmdheight | 1 | Default; needed for `:!cmd` output visibility |
+| Statusline | Global (laststatus=3) | lualine with `globalstatus = true` |
 | Showmode | Off | Lualine shows mode instead |
 | Scrolloff | 10 lines | |
 | Undo | Persistent (undofile) | |
 | Whitespace | Visible | tabs=→, trail=·, eol=↵, lead=·, nbsp=␣ |
+| **Float borders** | `winborder = 'rounded'` | Native 0.11 — all floats get rounded borders |
+| **Diagnostics** | `vim.diagnostic.config` | Virtual text, severity sort, signs, bordered float |
 | Bigfile | >1.5MB disables plugins | |
+
+### Diagnostics display (native)
+
+Configured once in `options.lua` via `vim.diagnostic.config`:
+
+- **virtual_text** — inline messages (shown when there are several on a line)
+- **severity_sort** — errors render above warnings/hints
+- **signs** — nerd-font glyphs in the sign column, matching the lualine icons
+- **float** — rounded border, shows the source when multiple
 
 ## Plugin Manager — lazy.nvim
 
 - Auto-bootstraps on first launch
 - Plugin specs loaded from `lua/maths-lover/plugins/`
 - `:Lazy` to open the dashboard (install, update, clean, profile)
-- `lazy-lock.json` pins exact versions (gitignored)
+- `lazy-lock.json` pins exact versions
 
 ## Installed Plugins
 
 | Plugin | Purpose | Load |
 |--------|---------|------|
 | nvim-treesitter | Parser management, highlighting, indentation | Eager |
-| nvim-treesitter-textobjects | Syntax-aware text objects and motions | With treesitter |
+| nvim-treesitter-textobjects | Syntax-aware text objects + repeatable moves | With treesitter |
 | nvim-treesitter-context | Sticky function/class header (max 3 lines) | With treesitter |
 | which-key.nvim | Keymap popup on partial input | VeryLazy |
 | telescope.nvim | Fuzzy finder UI | VimEnter |
 | telescope-fzf-native.nvim | Native fzf sorter (compiled C) | With telescope |
 | telescope-ui-select.nvim | Replaces vim.ui.select | With telescope |
-| nvim-lspconfig | LSP client configuration | BufReadPre |
+| **project.nvim** | Auto-detect project roots + recent-projects picker | VeryLazy |
+| **yazi.nvim** | Filesystem browser (replaces oil + netrw) | VeryLazy |
+| nvim-lspconfig | LSP server defaults (paired with native `vim.lsp.config`) | BufReadPre |
 | flutter-tools.nvim | Dart/Flutter LSP + widget enhancements | ft=dart |
-| blink.cmp | Autocompletion | With lspconfig |
+| blink.cmp (1.x) | Autocompletion + signature help | With lspconfig |
 | friendly-snippets | VSCode-format snippet collection | With blink.cmp |
-| rose-pine | Primary colorscheme (main = dark, dawn = light) | Eager, priority=1000 |
-| pinot_noir.nvim | Colorscheme (local, noir style) | Lazy |
-| colorbuddy.nvim | Colorscheme helper (pinot_noir dependency) | With pinot_noir |
-| nord.nvim | Colorscheme (alternative) | Lazy |
-| gitsigns.nvim | Git signs in gutter, hunk operations | BufReadPre |
-| git-conflict.nvim | Merge conflict resolution helpers | BufReadPre |
-| lazygit.nvim | Floating-window lazygit TUI | On command/key |
-| oil.nvim | File explorer (edit filesystem as buffer) | Eager |
+| rose-pine | Colorscheme (main = dark, dawn = light) | Eager, priority=1000 |
+| gitsigns.nvim | Git signs in gutter, hunk operations, blame | BufReadPre |
 | conform.nvim | Code formatter (format on save) | BufWritePre |
 | lualine.nvim | Statusline | Eager |
 | basedpyright | Python type checking + intellisense (via LSP) | ft=python |
@@ -86,6 +98,10 @@
 | gopls | Go LSP server | ft=go |
 | plenary.nvim | Lua utility library (dependency) | — |
 | nvim-web-devicons | File icons (dependency) | — |
+
+> **Git TUI is plugin-free.** lazygit runs in a native floating `:terminal`
+> defined in `git-terminal.lua` — no `lazygit.nvim`. Merge conflicts are
+> resolved in lazygit or with native `:diffget` / `:diffput`.
 
 ## Installed Treesitter Parsers
 
@@ -130,6 +146,28 @@ lua, vim, vimdoc, markdown, markdown_inline, python, dart, go, c, cpp, rust, jav
 | `<leader><tab>` | n | Next tab |
 | `<leader><S-tab>` | n | Previous tab |
 
+### Find / Files — `<leader>f`, `<leader>e`
+
+File browsing (yazi) and project switching (project.nvim).
+
+| Key | Mode | Action |
+|-----|------|--------|
+| `-` | n | Open yazi at the current file |
+| `<leader>e` | n | Open yazi at the current file |
+| `<leader>E` | n | Open yazi at the cwd |
+| `<leader>fy` | n | Resume last yazi session |
+| `<leader>fp` | n | Project picker (switch root) |
+
+**Inside yazi:** `h` / `l` walk directories, `<CR>` opens, `<f1>` help.
+Navigate to any path on disk and open files into the current session.
+
+> **Multi-project workflow.** project.nvim auto-detects a root (`.git`,
+> `go.mod`, `pyproject.toml`, `package.json`, `Makefile`, `Cargo.toml`, …)
+> and sets the cwd to whichever project the focused buffer belongs to. So
+> `<leader>sf` / `<leader>sg` always scope to the active project, and you can
+> keep several projects open in one session. `<leader>fp` jumps between
+> recent roots; yazi reaches files outside any project.
+
 ### Search — `<leader>s` (Telescope)
 
 | Key | Mode | Action | Backend |
@@ -148,7 +186,6 @@ lua, vim, vimdoc, markdown, markdown_inline, python, dart, go, c, cpp, rust, jav
 | `<leader>sc` | n | Git commits | git |
 | `<leader>ss` | n | Git status | git |
 | `<leader>sC` | n | Colorschemes (live preview) | — |
-| `<leader>sT` | n | Search TODOs | — |
 | `<leader>?` | n | Show all keymaps (which-key) | — |
 
 **Inside Telescope picker:**
@@ -163,6 +200,7 @@ lua, vim, vimdoc, markdown, markdown_inline, python, dart, go, c, cpp, rust, jav
 | `<C-q>` | Send to quickfix list |
 | `<Tab>` / `<S-Tab>` | Toggle multi-select |
 | `<C-u>` / `<C-d>` | Scroll preview |
+| `<C-/>` (insert) / `?` (normal) | Show this picker's mappings |
 
 **fzf-native syntax in search prompts:**
 
@@ -192,11 +230,31 @@ These activate when an LSP server attaches to a buffer.
 | `<leader>cs` | n | Document symbols | Telescope |
 | `<leader>cS` | n | Workspace symbols | Telescope |
 | `<leader>ct` | n | Type definition | Telescope |
+| `<leader>ch` | n | Toggle inlay hints | vim.lsp |
 | `<leader>cf` | n | Format buffer | conform.nvim |
 | `<leader>cd` | n | Diagnostics list (quickfix) | built-in |
 | `<leader>cD` | n | Buffer diagnostics (quickfix) | built-in |
 
-### Treesitter Text Objects
+**Native LSP defaults (Neovim 0.11).** Core auto-maps these on every LSP
+buffer — no config needed, available alongside the above:
+
+| Key | Action |
+|-----|--------|
+| `grn` | Rename symbol |
+| `gra` | Code action |
+| `grr` | References |
+| `gri` | Implementation |
+| `grt` | Type definition |
+| `gO` | Document symbols |
+| `<C-s>` (insert) | Signature help |
+
+**Inlay hints** are enabled by default when the server supports them
+(`vim.lsp.inlay_hint`); `<leader>ch` toggles them per buffer.
+
+**Document highlight** — resting the cursor on a symbol highlights its other
+uses in the buffer (LSP `documentHighlight`, cleared on move).
+
+### Treesitter Text Objects & Motions
 
 | Key | Mode | Action |
 |-----|------|--------|
@@ -209,6 +267,12 @@ These activate when an LSP server attaches to a buffer.
 | `][` / `[]` | n, x, o | Next/previous class end |
 | `<leader>a` | n | Swap with next parameter |
 | `<leader>A` | n | Swap with previous parameter |
+| `;` | n, x, o | **Repeat last move** (TS move or f/t/F/T) |
+| `,` | n, x, o | **Repeat last move, opposite direction** |
+| `f` / `F` / `t` / `T` | n, x, o | Find char (now repeatable with `;` / `,`) |
+
+> After any `]m` / `]]` / `f` / `t` jump, hammer `;` and `,` to repeat it
+> forward / backward. The TS move functions are auto-tracked.
 
 ### Hunk (Git) — `<leader>h` (gitsigns)
 
@@ -220,33 +284,24 @@ These activate when an LSP server attaches to a buffer.
 | `<leader>hS` | n | Stage entire buffer |
 | `<leader>hR` | n | Reset entire buffer |
 | `<leader>hp` | n | Preview hunk in float |
-| `<leader>hb` | n | Blame current line |
+| `<leader>hb` | n | Blame current line (full) |
+| `<leader>hB` | n | Toggle inline blame (virtual text) |
 | `<leader>hd` | n | Diff this file |
+| `<leader>hq` | n | Send all repo hunks to quickfix |
 | `ih` | o, x | Select hunk (text object) |
 
-### Git — `<leader>g` (lazygit)
+### Git — `<leader>g` (native lazygit terminal)
 
 | Key | Mode | Action |
 |-----|------|--------|
 | `<leader>gg` | n | Open lazygit (cwd) |
-| `<leader>gG` | n | Open lazygit (current file's repo) |
+| `<leader>gG` | n | Open lazygit (current file's repo root) |
 | `<leader>gl` | n | Lazygit log filtered to current file |
 
-Lazygit launches in a floating window. On exit, gitsigns auto-refreshes
-so the gutter reflects the new repo state.
-
-### Merge Conflict — `<leader>mc` (git-conflict.nvim)
-
-| Key | Mode | Action |
-|-----|------|--------|
-| `]x` / `[x` | n | Next/previous conflict |
-| `<leader>mco` | n | Choose ours |
-| `<leader>mct` | n | Choose theirs |
-| `<leader>mcb` | n | Choose both |
-| `<leader>mcn` | n | Choose none |
-| `<leader>mcl` | n | List conflicts in quickfix |
-
-> Full-tree git workflows (status, log, diff, stage, commit) are handled outside Neovim via lazygit.
+Lazygit launches in a native floating `:terminal` (`git-terminal.lua`). On
+exit the float closes and gitsigns auto-refreshes so the gutter reflects the
+new repo state. **Merge conflicts:** resolve in lazygit, or with native
+`:diffget //2` (ours) / `:diffget //3` (theirs) during a `:Gdiff`-style merge.
 
 ### Diagnostics Navigation (built-in)
 
@@ -258,39 +313,36 @@ so the gutter reflects the new repo state.
 | `<leader>cd` | n | All diagnostics → quickfix |
 | `<leader>cD` | n | Buffer diagnostics → quickfix |
 
-### File Explorer (oil.nvim)
+### Completion (blink.cmp 1.x — `default` preset)
 
 | Key | Mode | Action |
 |-----|------|--------|
-| `-` | n | Open parent directory |
-
-**Inside oil buffer:**
-
-| Key | Action |
-|-----|--------|
-| `<CR>` | Open file / enter directory |
-| `-` | Go to parent directory |
-| `g.` | Toggle hidden files |
-| `<C-s>` | Open in vertical split |
-| `<C-h>` | Open in horizontal split |
-| `<C-t>` | Open in new tab |
-| `g?` | Show help |
-
-To rename: edit the filename text, then `:w`
-To delete: delete the line, then `:w`
-To create: add a new line with a filename, then `:w`
-
-### Completion (blink.cmp)
-
-| Key | Mode | Action |
-|-----|------|--------|
-| `<C-space>` | i | Trigger completion |
+| `<C-space>` | i | Show completion / toggle docs |
 | `<C-y>` | i | Accept selected item |
 | `<C-e>` | i | Dismiss completion |
-| `<C-n>` / `<C-j>` | i | Next item |
-| `<C-p>` / `<C-k>` | i | Previous item |
+| `<C-n>` / `<C-p>` | i | Next / previous item |
+| `<Up>` / `<Down>` | i | Next / previous item |
 | `<C-b>` / `<C-f>` | i | Scroll documentation |
+| `<C-k>` | i | Toggle signature help |
 | `<Tab>` / `<S-Tab>` | i | Jump snippet placeholders |
+
+Sources: `lsp`, `path`, `snippets`, `buffer`. Signature help is enabled.
+
+### Theme
+
+| Key | Mode | Action |
+|-----|------|--------|
+| `<leader>tt` | n | Toggle light (rose-pine-dawn) / dark (rose-pine-main) |
+
+### Neovide (GUI only)
+
+Active only under Neovide (`neovide.lua` is guarded by `vim.g.neovide`).
+
+| Key | Mode | Action |
+|-----|------|--------|
+| `<D-s>` | n, i, v | Save file |
+| `<D-c>` / `<D-v>` | v / multiple | Copy / paste via system clipboard |
+| `<D-=>` / `<D-->` / `<D-0>` | n | Zoom in / out / reset |
 
 ---
 
@@ -330,8 +382,7 @@ the project tree is enough.
 | Command | Purpose |
 |---------|---------|
 | `:PyInfo` | Print the resolved interpreter and which source picked it (`VIRTUAL_ENV`, `.venv`, `venv`, `system`) |
-| `:LspInfo` | Show attached LSP clients for the buffer |
-| `:checkhealth vim.lsp` | LSP health overview |
+| `:checkhealth vim.lsp` | LSP health overview (attached clients, capabilities) |
 
 ### Per-project overrides
 
@@ -346,7 +397,7 @@ If you want to override the resolver, drop a `pyrightconfig.json` (or
 
 | Event | Action |
 |-------|--------|
-| TextYankPost | Briefly highlight yanked text |
+| TextYankPost | Briefly highlight yanked text (`vim.hl.on_yank`) |
 | VimResized | Auto-equalize split sizes |
 | BufReadPost | Restore cursor position |
 | FileType (help, qf, etc.) | Close with `q` |
@@ -356,20 +407,19 @@ If you want to override the resolver, drop a `pyrightconfig.json` (or
 | FileType (bigfile) | Disable heavy features |
 | FileType (all) | Enable treesitter highlight + indent |
 | BufWritePre | Format on save (conform.nvim) |
-| LspAttach | Register LSP keymaps |
+| LspAttach | LSP keymaps, inlay hints, document highlight |
 
 ---
 
 ## Colorschemes
 
 **Default (dark):** `rose-pine-main`
-**Toggle:** `<leader>tt` flips between `rose-pine-main` (dark) and `rose-pine-dawn` (light). Both ship with the same plugin, so the toggle is instant.
+**Toggle:** `<leader>tt` flips between `rose-pine-main` (dark) and
+`rose-pine-dawn` (light). Both ship with the same plugin, so the toggle is
+instant. Comments are softened (`subtle`) and de-italicised for the
+ComicCode font.
 
-**Alternatives (lazy-loaded):**
-- `:colorscheme pinot_noir` (local plugin, noir style)
-- `:colorscheme nord`
-
-Switch with live preview: `<leader>sC`
+Browse all schemes with live preview: `<leader>sC`.
 
 ---
 
@@ -377,17 +427,18 @@ Switch with live preview: `<leader>sC`
 
 | Tool | Required by | Install |
 |------|-------------|---------|
-| git | gitsigns, git-conflict, telescope | System package manager |
-| lazygit | lazygit.nvim TUI | `brew install lazygit` |
+| git | gitsigns, telescope, project.nvim | System package manager |
+| yazi (+ ya) | yazi.nvim file browser | `cargo install --force yazi-build` |
+| lazygit | native git terminal (`<leader>gg`) | `brew install lazygit` / pkg manager |
 | ripgrep (rg) | telescope live_grep | `brew install ripgrep` |
 | fd | telescope find_files | `brew install fd` |
-| C compiler | telescope-fzf-native | Xcode CLT / gcc |
+| C compiler | telescope-fzf-native | gcc / clang / Xcode CLT |
 | dart / flutter SDK | flutter-tools, dartls | flutter.dev |
 | go / gopls | go.lua LSP | go.dev |
 | goimports | conform (go formatting) | `go install golang.org/x/tools/cmd/goimports@latest` |
 | basedpyright | python.lua LSP | `uv tool install basedpyright` |
 | ruff | python.lua linting + conform formatting | `uv tool install ruff` |
 | stylua | conform (lua formatting) | `brew install stylua` |
-| uv | Per-project venv + dependency resolution | `brew install uv` |
+| uv | Per-project venv + dependency resolution | astral.sh/uv |
 | Python 3 (host) | python3_host_prog | uv-managed nvim-provider venv |
-| Nerd Font | Icons everywhere | Already installed |
+| Nerd Font | Icons everywhere | ComicCodeLigatures Nerd Font |
