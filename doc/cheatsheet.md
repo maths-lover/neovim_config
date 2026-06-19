@@ -115,6 +115,9 @@ Macros are just register contents — `:let @a='...'` edits one, `"ap` pastes it
 | `:%s/\<word\>//g` | Whole-word match with `\<` `\>` |
 | `:&&` | Repeat last substitute with same flags |
 
+> `inccommand=split` is enabled here, so `:%s/…/…/` shows a live preview in a
+> split as you type — you see every match change before you press Enter.
+
 **`:g` (global) — operate on matching lines:**
 
 ```
@@ -132,6 +135,17 @@ Macros are just register contents — `:let @a='...'` edits one, `"ap` pastes it
 :'<,'>normal Iprefix      prepend "prefix" to selected lines
 ```
 
+**`:sort` — reorder lines natively (cleaner than `:%!sort`):**
+
+```
+:sort                     sort the whole buffer (or a given range)
+:'<,'>sort                sort only the visual selection
+:sort u                   sort and drop duplicate lines
+:sort n                   numeric sort (by first number on each line)
+:sort i                   case-insensitive sort
+:sort /pattern/           sort by what follows the matched pattern
+```
+
 ### Motions you should be using
 
 | Motion | Jumps to |
@@ -147,10 +161,13 @@ Macros are just register contents — `:let @a='...'` edits one, `"ap` pastes it
 | `` `` `` (backtick backtick) | jump to position before the last jump |
 | `g;` `g,` | older / newer position in **changelist** |
 | `gi` | jump to last insert and resume Insert |
-| `gd` `gD` | local / global definition (text-based) |
+| `gd` `gD` | definition / declaration — **LSP here** (text-based only without an LSP) |
 | `zz` `zt` `zb` | center / top / bottom the current line on screen |
 | `<C-o>` `<C-i>` | jump back / forward in the **jumplist** |
 | `Ctrl-d` `Ctrl-u` | half-page down / up |
+
+> In this config `j`/`k` are remapped to `gj`/`gk`, so they already step by
+> *display* line — moving through wrapped/long lines just works.
 
 ### Marks
 
@@ -194,6 +211,20 @@ Macros are just register contents — `:let @a='...'` edits one, `"ap` pastes it
 | `zo` / `zc` | Open / close one fold |
 | `zj` / `zk` | Move to next / previous fold |
 
+### Spelling
+
+`spell` is auto-enabled here for text/markdown filetypes (see `autocmds.lua`), so
+these are live whenever you write prose or docs:
+
+| Key | Action |
+|-----|--------|
+| `]s` / `[s` | Next / previous misspelled word |
+| `z=` | Suggest corrections for the word under the cursor |
+| `zg` / `zw` | Add to dictionary as good / mark as wrong |
+| `zug` / `zuw` | Undo a `zg` / `zw` for the word |
+| `<C-x><C-k>` (insert) | Complete from the spell dictionary |
+| `:set spell!` | Toggle spell manually |
+
 ### Windows, tabs, buffers
 
 | Key | Action |
@@ -207,6 +238,19 @@ Macros are just register contents — `:let @a='...'` edits one, `"ap` pastes it
 | `<C-^>` | Toggle to the alternate (previous) buffer |
 | `:b {name}` | Jump to buffer by partial name (Tab-completes) |
 
+### Diff mode (native — pairs with git-conflict.nvim)
+
+| Command / key | Action |
+|---------------|--------|
+| `:diffthis` | Mark the current window for diffing (run in 2+ windows) |
+| `:diffsplit {file}` | Open `{file}` in a split and diff against it |
+| `:windo diffthis` / `:diffoff!` | Diff / un-diff all windows |
+| `]c` / `[c` | Next / previous change *(inside a diff)* |
+| `do` / `dp` | Diff **obtain** (pull other side in) / **put** (push out) |
+
+> Heads-up on `]c` `[c`: in normal buffers these are git hunks (gitsigns); inside
+> a `:diffthis` they navigate diff changes. Same keys, context-dependent.
+
 ### Quickfix & location list
 
 The quickfix list is the backbone of project-wide edits.
@@ -218,6 +262,14 @@ The quickfix list is the backbone of project-wide edits.
 | `:cdo {cmd}` | Run `{cmd}` on every quickfix entry |
 | `:cfdo {cmd}` | Run `{cmd}` once per file in the list |
 | `:ldo` / `:lopen` | Same for the location list (window-local) |
+
+**Populate it without any plugin:**
+
+| Command | Action |
+|---------|--------|
+| `:vimgrep /pat/ **/*.lua` | Native recursive search → quickfix (zero config) |
+| `:grep {pat}` | Search via `grepprg` → quickfix (set `grepprg=rg\ --vimgrep`) |
+| `:args **/*.lua` → `:argdo {cmd}` | Run `{cmd}` over the arglist, e.g. `:argdo %s/old/new/ge \| update` |
 
 > **Multi-file refactor:** in any Telescope picker, multi-select with `<Tab>`
 > then `<C-q>` to send results to quickfix → `:cdo s/old/new/g | update`.
@@ -233,6 +285,20 @@ The quickfix list is the backbone of project-wide edits.
 | `<C-o>` (insert) | Run one normal-mode command, then back to insert |
 | `<C-w>` / `<C-u>` (insert) | Delete previous word / to line start |
 | `<C-t>` / `<C-d>` (insert) | Indent / dedent current line |
+
+### Native insert-mode completion (`<C-x>` submode)
+
+Even with blink.cmp driving the popup, these native sources work in any buffer
+with no setup — `<C-x><C-f>` for file paths is the standout:
+
+| Key (insert) | Completes |
+|--------------|-----------|
+| `<C-x><C-f>` | **File paths** (relative to cwd) |
+| `<C-x><C-l>` | Whole lines from open buffers |
+| `<C-x><C-o>` | Omni completion (LSP-backed when attached) |
+| `<C-x><C-n>` / `<C-x><C-p>` | Keywords from the current buffer |
+| `<C-x><C-]>` | Tags |
+| `<C-n>` / `<C-p>` | Generic keyword completion (next / prev) |
 
 ### Files & the outside world
 
