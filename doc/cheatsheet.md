@@ -33,6 +33,83 @@ muscle memory. Leader is `<Space>`. For the exhaustive list see the
 
 ---
 
+## File browsing with yazi
+
+yazi runs as a TUI inside Neovim (via yazi.nvim) and replaces oil/netrw. Its real
+power is the `fd` / `ripgrep` / `zoxide` / `fzf` integration — picking a file
+opens it straight into a Neovim buffer.
+
+**Open it (from Neovim):** `-` or `<leader>e` at the current file · `<leader>E`
+at cwd · `<leader>fy` resume the last session · inside yazi `<f1>` shows help.
+
+### Navigate & open
+
+| Key | Action |
+|-----|--------|
+| `j` / `k` | Down / up (arrows work too) |
+| `h` / `l` | Parent dir / enter dir |
+| `H` | Back to previous directory (history) |
+| `gg` / `G` | Top / bottom |
+| `<C-u>` / `<C-d>` | Half page up / down (`<C-b>`/`<C-f>` full page) |
+| `<Enter>` / `o` | Open file (in Neovim) |
+| `O` | Open interactively (pick an app) |
+| `<Tab>` | Spot — quick metadata/preview of the hovered file |
+| `q` / `<Esc>` | Quit yazi / cancel current mode |
+
+### Find — powered by fd, rg, zoxide & fzf
+
+| Key | Tool | Action |
+|-----|------|--------|
+| `s` | **fd** | Search files **by name** recursively under cwd |
+| `S` | **ripgrep** | Search files **by content** under cwd |
+| `<C-s>` | — | Cancel the ongoing `s`/`S` search |
+| `z` | **fzf** | Fuzzy-jump to any file/dir below cwd |
+| `Z` | **zoxide** | Smart-jump to a frequent directory (anywhere) |
+| `g<Space>` | — | `cd` interactively (type a path) |
+| `f` | — | Smart filter the current listing as you type |
+| `/` / `?` | — | Find next / previous in the current dir |
+| `n` / `N` | — | Repeat find forward / back |
+
+> **Gotcha (yazi defaults):** `z` is **fzf** and `Z` is **zoxide** — the opposite
+> of what most people guess. Mnemonic: lowercase `z` stays *local* (fuzzy under
+> cwd via fzf); uppercase `Z` jumps *anywhere* via your zoxide history.
+>
+> Tool → feature map: **fd** drives `s` and yazi's file discovery · **ripgrep**
+> drives `S` content search · **zoxide** drives `Z` (it queries the same DB your
+> shell `z` builds) · **fzf** drives `z`. All four are already installed here.
+
+### Select & act on files
+
+| Key | Action |
+|-----|--------|
+| `<Space>` | Toggle selection of the hovered file (and move down) |
+| `v` / `V` | Visual select mode / visual unselect mode |
+| `<C-a>` / `<C-r>` | Select all / invert selection |
+| `y` / `x` | Yank (copy) / cut selected files |
+| `p` / `P` | Paste / paste with overwrite |
+| `d` / `D` | Trash / permanently delete |
+| `a` / `A` | Create file (trailing `/` = dir) / bulk-create |
+| `r` | Rename (cursor before extension) |
+| `.` | Toggle hidden files |
+| `cc` / `cd` / `cf` / `cn` | Copy full path / dirname / filename / name-no-ext |
+
+### Tabs, shell & jumps
+
+| Key | Action |
+|-----|--------|
+| `tt` / `tr` | New tab in cwd / rename tab |
+| `1`–`9` | Switch to tab N |
+| `[` / `]` | Previous / next tab (`{` `}` swap) |
+| `gh` / `gc` / `gd` | Go home / `~/.config` / `~/Downloads` |
+| `;` | Run a shell command in cwd (non-blocking) |
+| `:` | Run a shell command and block until it finishes |
+
+> Workflow: `Z` to a project (zoxide), `S` to grep for the symbol (ripgrep),
+> `<Enter>` to open the hit in Neovim. Or hover a file and `;` to run a one-off
+> shell command against it without leaving the browser.
+
+---
+
 ## Native Neovim tricks & tips
 
 Everything below is **built-in vim/Neovim** — no plugins. This is where the
